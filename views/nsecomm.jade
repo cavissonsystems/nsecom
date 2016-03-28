@@ -1,0 +1,141 @@
+html
+    head
+        title Sample Applications
+    body(bgcolor='white')
+        table(border='0')
+            tr
+                td
+                    img(src='./../images/logo.png')
+                td
+                    center
+                        h1 Sample Applications
+                    p
+                        | This is the home page for a sample application used for NetDiagnostics testing
+        p
+            | Click any one of following links:
+            ul
+                b
+                    u CheckOutAndPlaceOrder Application
+                li
+                    | Product check out and place order
+                    a(href='/nsecomm/checkOutAndPlaceOrder?sleepTimeForCC=6&sleepTimeForValidate=40&level=5') CheckOutAndPlaceOrder
+                li
+                    | Multiple calls
+                    a(href='/nsecomm/manyTier') Click Here
+                li
+                    | Product check out and place order
+                    a(href='/nsecomm/checkOutAndPlaceOrder?productid=1520&sessionid=6000') CheckOutAndPlaceOrder_New
+                li
+                    | Product check out and place order
+                    a(href='/nsecomm/checkOutAndPlaceOrder?log=info&msg=Testing&count=3&level=1') PrintLog
+                li
+                    | Product check out and place order
+                    a(href='/nsecomm/checkOutAndPlaceOrder?manymethods=yes') ManyMethodsCall
+                li
+                    | Product check out and place order
+                    a(href='/nsecomm/checkOutAndPlaceOrder?operation=insert&prodID=001&prodName=Jeans&quantity=10&price=9000') InsertData
+                li
+                    | Product check out and place order
+                    a(href='/nsecomm/checkOutAndPlaceOrder?operation=select&column=all') RetrieveData
+                li
+                    | Product check out and place order
+                    a(href='/nsecomm/checkOutAndPlaceOrder?operation=update&column=price&uvalue=9889&wcolumn=id&wvalue=P001') UpdateData
+                li
+                    | Product check out and place order
+                    a(href='/nsecomm/checkOutAndPlaceOrder?operation=delete&wcolumn=id&wvalue=P001') DeleteData
+                li
+                    | Product check out and place order
+                    a(href='checkOutAndPlaceOrder?query=select%20*%20from%20purchaseorder') ExecuteQuery
+                li
+                    | Product check out and place order with hotspot
+                    a(href='checkOutAndPlaceOrderHotSpot') CheckOutAndPlaceOrderHotSpot
+                li
+                    | Connect with db and execute query
+                    a(href='executedbquery') ConnectDB
+                    br
+                    b
+                        u NSECOM APPLICATION
+                li
+                    | HomePage
+                    a(href='home') nsecom
+                    br
+                    b
+                        u NDWebProject
+                li
+                    | HomePage
+                    a(href='home') nsecom
+                    br
+                    b
+                        u NDWebProject
+                li
+                    | HomePage
+                    a(href='NDWebProject/jsp/HomePage.jsp') NDWebProject
+                    br
+                    b
+                        u MULTITIER APPLICATION
+                li
+                    | SimpleTwoTierApplication
+                    a(href='frontedTier') FrontendServlet
+                li
+                    | SimpleMultilevelTierApplication
+                    a(href='frontendMultilevelServlet') FrontendMultilevelServlet
+                li
+                    | HessianTwoTierApplication
+                    a(href='frontEndHessian') HessianFrontendServlet
+                li
+                    | ApacheHTTPClientRequest
+                    a(href='frontendHTTPClintRequest') ApacheHTTPClientRequest
+                li
+                    a(href='frontendApacheWinkClientRequest') Frontend for ApacheWink And Spring RestTemplate ClientRequest
+                    br
+                    b
+                        u Generic Call outs
+                li
+                    | ConfigureCallOuts
+                    a(href='genericCallOuts?fileName=nsecom.properties') GenericCallOuts
+                    br
+                    b
+                        u Testing App
+                li
+                    | Testing"
+                    a(href='start') StartServlet
+                li
+                    | Instrumentation Testing
+                    a(href='Instrument/jsp/startInstr.jsp') InstrumentServlet
+                li
+                    | DeadLock Testing
+                    a(href='DeadLock/jsp/DeadLock.jsp') DeadLockServlet
+                    br
+                    b
+                        u Redirections
+                li
+                    | RedirectionPage
+                    a(href='redirection.jsp', title='Different cases of redirection can be tested here') First Page
+                    br
+                    b
+                        u Exceptions
+                li
+                    | Testing
+                    a(href='/nsecomm/exception', title='Different cases of exceptions can be tested here') Exception Page
+                    br
+                    b
+                        u Threads
+                li
+                    a(href='ThreadPage.html', title='Please click here to generate threads') Testing Thread Callout without Thread Pool
+
+                l
+                li
+                    a(href='ThreadPools.html', title='Please click here to generate threads using ThreadPoolExecutor') Testing Thread Callout using Thread Pool
+                    br
+                    b
+                        u backend
+                li
+                    a(href='/nsecomm/abc', title='for backend request') backend page
+                    br
+                    b
+                        u Web Services
+                li
+                    a(href='webServiceClient', title='Backend Calls to web services') Test Web Service calls from backend
+                li
+                    a(href='coherenceCalls', title='Discover Coherence and MemCache') Discover Coherence and MemCache
+                    // <li><a href="genericTypeTestService" title="Generic object detection" > call methods with generic signature</a>
