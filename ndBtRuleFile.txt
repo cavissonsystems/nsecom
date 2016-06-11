@@ -5,3 +5,5 @@
 7|PlaceOrder|4|0|1|/nsecomm/checkOutAndPlaceOrder?productid=1520&sessionid=6000
 7|PrintMessage|5|0|1|/nsecomm/checkOutAndPlaceOrder?log=info&msg=Testing&count=3&level=1
 7|ManyMethod|6|0|1|/nsecomm/checkOutAndPlaceOrder?manymethods=yes
+7|MultiInstances|7|0|1|/nsecomm/HttpCallout
+7|YahooCall|8|0|1|/nsecomm/manyTier_yahoo

@@ -1,4 +1,9 @@
-    // for instrumenting application
+var netjsagent = require('netjsagent').instrument();      // for instrumenting application
+process.on('uncaughtException', function (err) {
+  console.log((new Date).toUTCString() + ' uncaughtException:', err.message);
+  console.log(err.stack);
+  process.exit(1)
+});
 
 var express = require('express');
 var path = require('path');
@@ -14,7 +19,8 @@ var users = require('./routes/users');
 var nsecomm = require('./routes/nsecomm');
 var checkOutOrder = require('./routes/checkOutAndPlaceOrder');
 var manyTier = require('./routes/manyTier');
-
+var multiClient = require('./routes/multiCallOut');
+var tierCallout_yahoo = require('./routes/manyTier_yahoo');
                  // start cpu profiling
 
 var mongo = require('mongodb');
@@ -46,6 +52,8 @@ app.use('/users', users);
 app.use('/nsecomm', nsecomm);
 app.use('/nsecomm/checkOutAndPlaceOrder', checkOutOrder);
 app.use('/nsecomm/manyTier', manyTier);
+app.use('/nsecomm/HttpCallout',multiClient);
+app.use('/nsecomm/manyTier_yahoo',tierCallout_yahoo);
 
 
 // catch 404 and forward to error handler

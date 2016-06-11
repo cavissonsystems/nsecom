@@ -1,5 +1,5 @@
 /**
- * Created by compass241 on 19-10-2015.
+ * Created by Sahil on 19-10-2015.
  */
 
 var express = require('express');
@@ -59,125 +59,19 @@ function availabilityCheck(req, res) {
             if(f1 == true && f2 == true ) {
                 sendResp();
             }
-            //res.render('checkout');
-            //http.request(options1, callback1).end();
 
         });
-    }
+    };
 
-    http.request(options, callback).end();
-    http.request(options1, callback1).end();
-
-    //*****************CASSANDRA*************
-
-   /* var con = new connection({host : '127.0.0.1', port :'9042' ,keyspace : 'cavisson'});
-    console.log("going to connect");
-    con.connect(function(err,data)
-    {
-        if (err) {
-            // Failed to establish connection.
-            throw err;
-            console.log("Failed to establish connection");
-        }
-
-        con.execute('SELECT * FROM test ;', function(err,data) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log(data);
-            }
-        });
-    });*/
-
-    /*function doSimpleConnect(callback) {
-        // these are the connection parameters you need to connect to Cassandra.
-        var connectionOptions = {
-            host: '127.0.0.1',
-            port: 9042,
-            keyspace: 'cavisson',
-            use_bigints: false
-        };
-
-        var con = new Connection(connectionOptions);
-        con.connect();
-        console.log('connected successfully');
-*/
-
-   /* var Connection = require('cassandra-client').PooledConnection;
+     http.request(options, callback).on('error',function(err){console.log(err)}).end();
+     http.request(options1, callback1).on('error', function(err){console.log(err)}).end();
 
 
-    var cassandra = new Connection({'hosts': '127.0.0.1', 'port':'9042' , 'keyspace': 'cavisson'});
-    cassandra.on('log', function(level, message, obj) {
-        console.log('log event: %s -- %j', level, message);
-    });
-    var cql = "SELECT * FROM test ;";
-
-    cassandra.execute(cql, function(err, rows) {
-        if(err) console.log("erreur à la requete");
-        else
-        console.log(rows);
-        cassandra.shutdown(function() {
-            console.log("connectoin pool shutdown");
-        });
-    })
-        *//*con.connect(function(err) {
-            // if err != null, something bad happened.
-            // else, assume all is good.  your connection is ready to use.
-            if (!err) {
-                // close the connection and return to caller.
-                console.log("no error");
-                con.close(callback);
-                console.log("hiiiiiiiiiiii");
-            } else {
-                // no need to close, just return to caller.
-                console.log(" error");
-                callback(err);
-                console.log("helo");
-            }
-        });
-    }*/
-
-   /* var client = new cassandra.Client({contactPoints : ['127.0.0.1:9042'], keyspace : 'cavisson'});
-    client.connect(function (err,data) {
-    console.log("connected with cassandra");
-    });
-    var query = client.execute('SELECT * FROM test ;',function (err,data) {
-        if (!err)
-            console.log(data);
-        else
-            console.log(err);
-    });
-*/
-
-    //*****************PostGrese*************
-
-   /* var conString = "pg://postgres:sidd@localhost:5432/test";
-
-    client = new pg.Client(conString);
-    client.connect();
-    console.log("Connected");
-    var query = client.query("INSERT INTO purchaseorder values('001','Jeans',10,100)", function (err, result) {
-        if (err) throw err;
-        console.log('Result: ', result);
-        });
-
-    query.on('end', function() {
-        client.end();
-        f3 = true;
-        if(f1 == true && f2 == true && f3 == true) {
-            sendResp();
-        }
-    });*/
 
 function sendResp(){
         res.render('checkout');
      f1 = false;
      f2 = false;
-    // f3 = false;
-
-    /*else{
-        sendResp();
-    }*/
 };
 
 
@@ -187,6 +81,5 @@ router.get('/', function(req, res, next){
     availabilityCheck(req, res);
 });
 
-//req.render('checkout');
 
 module.exports = router;

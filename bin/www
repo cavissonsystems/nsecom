@@ -57,7 +57,7 @@ cess.pid + "\n file = " + data);
    * Get port from environment and store in Express.
    */
 
-  var port = normalizePort(process.env.PORT || '3003');
+  var port = normalizePort(process.env.PORT || '3000');
   app.set('port', port);
 
   /**
@@ -65,6 +65,12 @@ cess.pid + "\n file = " + data);
    */
 
   var server = http.createServer(app);
+
+process.on('uncaughtException', function (err) {
+  console.log((new Date).toUTCString() + ' uncaughtException:', err.message);
+  console.log(err.stack);
+  process.exit(1)
+});
 
 /*  memwatch.on('leak', function (info) {
     console.error('Memory leak detected: ', info);

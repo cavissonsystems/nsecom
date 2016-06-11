@@ -20,9 +20,6 @@ html
                     | Product check out and place order
                     a(href='/nsecomm/checkOutAndPlaceOrder?sleepTimeForCC=6&sleepTimeForValidate=40&level=5') CheckOutAndPlaceOrder
                 li
-                    | Multiple calls
-                    a(href='/nsecomm/manyTier') Click Here
-                li
                     | Product check out and place order
                     a(href='/nsecomm/checkOutAndPlaceOrder?productid=1520&sessionid=6000') CheckOutAndPlaceOrder_New
                 li
@@ -47,8 +44,14 @@ html
                     | Product check out and place order
                     a(href='checkOutAndPlaceOrder?query=select%20*%20from%20purchaseorder') ExecuteQuery
                 li
-                    | Product check out and place order with hotspot
-                    a(href='checkOutAndPlaceOrderHotSpot') CheckOutAndPlaceOrderHotSpot
+                    | Click Here to Make Multiple Http CallOut to Google & Gmail
+                    a(href='/nsecomm/manyTier') Multiple Http CallOut
+                li
+                    | Click Here to Make Http CallOut to Yahoo
+                    a(href='/nsecomm/manyTier_yahoo') ManyTier_yahoo
+                li
+                    | Click Here to make Http Callout to Node & Java Applications
+                    a(href='/nsecomm/HttpCallout') Node_1 & Node_2 & Java
                 li
                     | Connect with db and execute query
                     a(href='executedbquery') ConnectDB
