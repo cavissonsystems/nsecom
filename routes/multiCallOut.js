@@ -8,7 +8,7 @@ var fs = require('fs');
 var path = require('path');
 var f1 = false;
 var f2 = false;
-var f3 = false;
+//var f3 = false;
 var file_map = new Object();
 
 function readPropertiesFile(file)
@@ -35,18 +35,21 @@ function readPropertiesFile(file)
 function mtierCallOut(req,res)
 {
 
-    var options = file_map['1'];
+
+    var options =
+    {host: 'nsecom-master-a.herokuapp.com',
+        path: '/nsecomm/manyTier'};
+
+    var options1 = { host: 'nsecom-master-b.herokuapp.com',
+        path: '/nsecomm/manyTier_yahoo'};
+
+  //  var options2 = { host: '10.10.40.13',
+    //    port: '7001',
+      //  path: '/nsecom'};
+
+   /* var options = file_map['1'];
     var options1 = file_map['2'];
-    /*var options =
-                    {host: '127.0.0.1',
-                    port: '3001',
-                    path: '/nsecomm/manyTier'};
-
-    var options1 = { host: '127.0.0.1',
-        port: '3002',
-        path: '/nsecomm/manyTier_yahoo'};*/
-
-    var options2 = file_map['3'];
+    var options2 = file_map['3'];*/
 
     callback = function(res)
     {
@@ -60,7 +63,7 @@ function mtierCallOut(req,res)
             console.log("Node_1 is called");
 
             f1 = true;
-            if(f1 == true && f2 == true && f3 == true) {
+            if(f1 == true && f2 == true ) {
                 sendRespMultiInstance();
             }
         });
@@ -79,14 +82,14 @@ function mtierCallOut(req,res)
             console.log("Node_2 is called ");
 
             f2 = true;
-            if(f1 == true && f2 == true && f3 == true) {
+            if(f1 == true && f2 == true ) {
                 sendRespMultiInstance();
             }
 
         });
     };
 
-
+/*
      callback2 = function(res)
      {
      var data = "";
@@ -106,17 +109,17 @@ function mtierCallOut(req,res)
 
      });
      };
-
+*/
     http.request(options,callback).on('error',function(err){console.log(err);}).end();
     http.request(options1,callback1).on('error',function(err){console.log(err);}).end();
-    http.request(options2,callback2).on('error',function(err){console.log(err);}).end();
+  //  http.request(options2,callback2).on('error',function(err){console.log(err);}).end();
 
     function sendRespMultiInstance()
     {
         res.render('multiCallOut', { title: 'Both Instances been called' });
         f1 = false;
         f2 = false;
-        f3 = false;
+    //    f3 = false;
     };
 };
 

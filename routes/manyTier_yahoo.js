@@ -28,7 +28,7 @@ function availabilityCheck(req, res)
             console.log("Yahoo call has ended");
 
             f1 = true;
-            if(f1 ==true && f2 ==true)
+            if(f1 == true && f2 == true)
                 respForCallout();
 
         });
