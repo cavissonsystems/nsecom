@@ -20,7 +20,8 @@ var nsecomm = require('./routes/nsecomm');
 var checkOutOrder = require('./routes/checkOutAndPlaceOrder');
 var manyTier = require('./routes/manyTier');
 var multiClient = require('./routes/multiCallOut');
-var tierCallout_yahoo = require('./routes/manyTier_yahoo');
+var tierCallout_mongodb = require('./routes/mongoDB');
+var tierCallout_postgres = require('./routes/postgreSQL');
                  // start cpu profiling
 
 var mongo = require('mongodb');
@@ -53,7 +54,9 @@ app.use('/nsecomm', nsecomm);
 app.use('/nsecomm/checkOutAndPlaceOrder', checkOutOrder);
 app.use('/nsecomm/manyTier', manyTier);
 app.use('/nsecomm/HttpCallout',multiClient);
-app.use('/nsecomm/manyTier_yahoo',tierCallout_yahoo);
+app.use('/nsecomm/mongodb',tierCallout_mongodb);
+app.use('/nsecomm/postgres',tierCallout_postgres);
+
 
 
 // catch 404 and forward to error handler

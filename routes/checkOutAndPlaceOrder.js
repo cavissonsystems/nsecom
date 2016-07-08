@@ -12,25 +12,7 @@ var http = require('http');
 
 function availabilityCheck(req, res) {
     console.log("availabilityCheck has called");
-    /*var options = {
-     host: 'www.gmail.com'};
 
-     callback = function(response) {
-     var str = '';
-
-     //another chunk of data has been recieved, so append it to `str`
-     response.on('data', function (chunk) {
-     str += chunk;
-     });
-
-     //the whole response has been recieved, so we just print it out here
-     response.on('end', function () {
-     //res.render('checkout');
-     console.log("Gmail call has ended");
-
-     });
-     }
-     http.request(options, callback).end();*/
     setTimeout(function() {
     }, 13000);
     checkStoreInventory();
@@ -118,34 +100,13 @@ function checkout(req, res, sleepTime, sleepTimeForValidate, level, isManyMethod
         checkExecutionTimeForMethods.calTimeFor_M49();
         checkExecutionTimeForMethods.calTimeFor_M50();
     }
-    /*var options = {
-        host: 'www.google.com'
-    };
-
-    callback = function (response) {
-        var str = '';
-
-        //another chunk of data has been recieved, so append it to `str`
-        response.on('data', function (chunk) {
-            str += chunk;
-        });
-
-        //the whole response has been recieved, so we just print it out here
-        response.on('end', function () {
-            res.render('checkout');
-            console.log("Google call has ended");
-
-        });
-    }
-    http.request(options, callback).end();*/
-
 }
 
 
 function exeDBQuery(query){
     console.log("exeDBQuery has called");
-    calculateAmount.makeConnection();
-    calculateAmount.executeDBQuery(query);
+    calculateAmount.makeConnection(query);
+   calculateAmount.executeDBQuery(query);
 }
 
 
@@ -213,7 +174,6 @@ function dbOperation(operation, productID, productName, column, uvalue, wcolumn,
 router.get('/', function(req, res, next) {
 
     var operation, stfcc, stfv, productID, productName, column, uvalue, wcolumn, wvalue, query, logSeverity, logMessage, isManyMethodsCall;
-
     var db = req.db;
     var sleepTime = req.query.sleepTimeForCC;
     var sleepTimeForValidate = req.query.sleepTimeForValidate;
@@ -231,7 +191,7 @@ router.get('/', function(req, res, next) {
     uvalue = req.query.uvalue;
     wcolumn = req.query.wcolumn;
     wvalue = req.query.wvalue;
-    query = req.query.query1;
+    query = req.query.query;
     logSeverity = req.query.log;
     logMessage = req.query.msg;
     var lc = req.query.count;
@@ -271,15 +231,17 @@ router.get('/', function(req, res, next) {
 
     console.log('sleep time = ' + sleepTime + ' sleep time for validation =' + sleepTimeForValidate + 'level = ' + level);
     if(operation != null)
-        dbOperation(operation, productID, productName, column, uvalue, wcolumn, wvalue, quantity, price);
+        dbOperation(operation, productID, productName, column, uvalue, wcolumn, wvalue, quantity, price ,query);
     if(query != null)
-        exeDBQuery(query);
+    {
+        exeDBQuery(query)
+    }
     //if(blevel != level)
     //  System.out.println("level value is diffrent blevel = " + blevel + " level value = " + level);
 
     var collection = db.get('usercollection');
 
-    res.render('checkout', {"stfcc" : stfcc, "stfv" : sleepTimeForValidate, "level" : level});
+  res.render('checkout', {"stfcc" : stfcc, "stfv" : sleepTimeForValidate, "level" : level});
 
     /* collection.find({},{},function(e,docs){
      res.render('check', {

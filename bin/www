@@ -3,82 +3,60 @@
 /**
  * Module dependencies.
  */
+var app = require('../app');            //starting application by calling app.js
+var debug = require('debug')('nsecom:server');
+var http = require('http');
 
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
 
 var fs = require('fs');
 
 var cluster = require('cluster');
 var os      = require('os');
-var worker;
-var numCPUs = os.cpus().length;
+
+var numCPUs = 1;
 
 /*
 if (cluster.isMaster) {
 
-  for (var i = 0; i < numCPUs; ++i) {
- var filename  = ((i +1)+".conf");
- cluster.fork({config_file : filename});
-
+  for (var i = 0; i < numCPUs; i++) {
+    cluster.fork();
 
     cluster.on('listening', function (worker, address) {
-      //console.log(worker.id + "_____" + address.port);
+      // console.log(worker.id + "_____" + worker.process.pid);
     });
 
     //give message on console and create a new worker porcess when a worker process dies
 
-
     cluster.on('exit', function (worker, code, signal)
     {
       //console.log("worker process with #" + worker.process.pid + "died");
-      cluster.fork(); //create the new worker process
+      //  cluster.fork(); //create the new worker process
     });
 
   }
 
 } else {
-
-  var confFile = process.env.config_file;
-  //console.log("process.env.config_file : "+process.env.config_file);
-
-  if (!confFile)
-    confFile = 'ndsetting_7899.conf';
-
-  /!*fs.readFile(confFile, function (err, data) {
-
-   // console.log("process is =" + pro
-cess.pid + "\n file = " + data);
-});*!/
 */
-  var app = require('../app');            //starting application by calling app.js
-  var debug = require('debug')('nsecom:server');
-  var http = require('http');
 
-  /**
-   * Get port from environment and store in Express.
-   */
-
-  var port = normalizePort(process.env.PORT || '3000');
-  app.set('port', port);
 
   /**
    * Create HTTP server.
    */
-
+  console.log("process is =" + process.pid );
   var server = http.createServer(app);
 
-process.on('uncaughtException', function (err) {
-  console.log((new Date).toUTCString() + ' uncaughtException:', err.message);
-  console.log(err.stack);
-  process.exit(1)
-});
-
-/*  memwatch.on('leak', function (info) {
-    console.error('Memory leak detected: ', info);
+  process.on('uncaughtException', function (err) {
+    console.log((new Date).toUTCString() + ' uncaughtException:', err.message);
+    console.log(err.stack);
+    process.exit(1)
   });
 
-  memwatch.on('stats', function (stats) {
-//console.log(stats);
-  });*/
 
   /**
    * Listen on provided port, on all network interfaces.
@@ -147,4 +125,8 @@ process.on('uncaughtException', function (err) {
         : 'port ' + addr.port;
     debug('Listening on ' + bind);
 
-}
+  }
+
+//}
+
+

@@ -5,8 +5,8 @@
 var express = require('express');
 var CheckExecutionTimeForMethods = express();
 //database
-var mongo = require('mongodb');
-var monk = require('monk');
+//var mongo = require('mongodb');
+//var monk = require('monk');
 
 CheckExecutionTimeForMethods.calTimeFor_M1 = function calTimeFor_M1(){
     console.log("calTimeFor_M1 has called");

@@ -13,7 +13,7 @@ var f1 = false;
 var f2 = false;
 //var f3 = false;
 
-function availabilityCheck(req, res) {
+function multiHttpConnection(req, res) {
     console.log("availabilityCheck has called");
     var options = {
         host: 'www.gmail.com'};
@@ -78,7 +78,7 @@ function sendResp(){
 }
 
 router.get('/', function(req, res, next){
-    availabilityCheck(req, res);
+    multiHttpConnection(req, res);
 });
 
 

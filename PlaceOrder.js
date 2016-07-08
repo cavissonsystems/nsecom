@@ -5,8 +5,8 @@
 var express = require('express');
 var PlaceOrder = express();
 //database
-var mongo = require('mongodb');
-var monk = require('monk');
+//var mongo = require('mongodb');
+//var monk = require('monk');
 
 
 PlaceOrder.fullfillOrder = function fullfillOrder() {

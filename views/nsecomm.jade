@@ -42,19 +42,19 @@ html
                     a(href='/nsecomm/checkOutAndPlaceOrder?operation=delete&wcolumn=id&wvalue=P001') DeleteData
                 li
                     | Product check out and place order
-                    a(href='checkOutAndPlaceOrder?query=select%20*%20from%20purchaseorder') ExecuteQuery
+                    a(href='/nsecomm/checkOutAndPlaceOrder?query=SELECT%20*%20FROM%20emp;') ExecuteQuery Through PostGreSQL DB
                 li
                     | Click Here to Make Multiple Http CallOut to Google & Gmail
                     a(href='/nsecomm/manyTier') Multiple Http CallOut
                 li
-                    | Click Here to Make Http CallOut to Yahoo
-                    a(href='/nsecomm/manyTier_yahoo') ManyTier_yahoo
+                    | Connect with MongoDB and execute query
+                    a(href='/nsecomm/mongodb') Connect MongoDB
                 li
                     | Click Here to make Http Callout to Node & Java Applications
                     a(href='/nsecomm/HttpCallout') Node_1 & Node_2 & Java
                 li
-                    | Connect with db and execute query
-                    a(href='executedbquery') ConnectDB
+                    | Connect with PostGres db and execute query
+                    a(href='/nsecomm/postgres') Connect PostGres DB
                     br
                     b
                         u NSECOM APPLICATION

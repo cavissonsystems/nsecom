@@ -1,7 +1,7 @@
 /**
  * Created by bala on 4/7/15.
  */
-var MongoClient = require('mongodb').MongoClient;
+var mongoClient = require('mongodb').MongoClient;
 var express = require('express');
 var CalculateAmount = express();
 //var mysql =  require('mysql');
@@ -9,7 +9,7 @@ var pg = require('pg');
 var http = require('http');
 var string = require('string');
 var connection ;
-var client;
+var client ;
 //database
 var mongo = require('mongodb');
 
@@ -55,15 +55,15 @@ function validate(stime){
     }, stime);
 }
 
-CalculateAmount.makeConnection = function makeConnection()
+CalculateAmount.makeConnection = function makeConnection(query)
 {
+    var URL = "postgres://dqlwzcsbobhcci:Lcm2mB5bUamVHB6FiiYWw1Jdkc@ec2-54-221-253-117.compute-1.amazonaws.com:5432/d935m16il25m65";
+    pg.defaults.ssl = true;
 
-   /*var conString = "pg://postgres:sidd@localhost:5432/test";
+    client = new pg.Client(URL);
+    client.connect();
 
-    client = new pg.Client(conString);
-    client.connect();*/
     console.log("Connected");
-
 }
 
 CalculateAmount.executeDBQueryChange = function executeDBQueryChange(query) {
@@ -95,26 +95,25 @@ CalculateAmount.executeDBQueryChange = function executeDBQueryChange(query) {
     }
 }
 
-CalculateAmount.executeDBQuery = function executeDBQuery(query){
-    queryString = URLDecoder.decode(query);
-    //System.out.println("query string = " + queryString);
-    if (query.startsWith("insert") || query.startsWith("update")) {
-        connection.query(query, function (err, result) {
-            if (err) throw err;
-            console.log('Result: ', result);
+CalculateAmount.executeDBQuery = function executeDBQuery(command){
 
-        })
-    }
-    else
-    if (query.startsWith("select")) {
-        connection.query(query, function (err, result) {
-            if (err) throw err;
-            console.log('Result: ', result);
-        })
-    }
-    else {
-        connection.query(query);
-    }
+    var query = client.query(command);
+
+        query.on("row", function (row, result) {
+            console.log("hiiiiiii");
+            result.addRow(row);
+        });
+        query.on("end", function (result) {
+            console.log("hiiiiiii 2222222222");
+            console.log(JSON.stringify(result.rows, null, " ") + "\n");
+            client.end();
+
+        });
+        query.on('err', function (err) {
+            console.log(err);
+        });
+
+
 }
 
 CalculateAmount.connectToCCAuthCenter = function connectToCCAuthCenter()
