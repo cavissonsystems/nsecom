@@ -46,7 +46,7 @@ function mtierCallOut(req,res)
         port: '3002',
         path: '/nsecomm/manyTier_yahoo'};*/
 
-    var options2 = file_map['3'];
+    //var options2 = file_map['3'];
 
     callback = function(res)
     {
@@ -58,11 +58,11 @@ function mtierCallOut(req,res)
         res.on('end',function()
         {
             console.log("Node_1 is called");
+            sendRespMultiInstance();
+           /* f1 = true;
+            if(f1 == true && f2 == true ) {
 
-            f1 = true;
-            if(f1 == true && f2 == true && f3 == true) {
-                sendRespMultiInstance();
-            }
+            }*/
         });
     };
 
@@ -79,7 +79,7 @@ function mtierCallOut(req,res)
             console.log("Node_2 is called ");
 
             f2 = true;
-            if(f1 == true && f2 == true && f3 == true) {
+            if(f1 == true && f2 == true ) {
                 sendRespMultiInstance();
             }
 
@@ -87,7 +87,7 @@ function mtierCallOut(req,res)
     };
 
 
-     callback2 = function(res)
+    /* callback2 = function(res)
      {
      var data = "";
      res.on('data',function(chunk)
@@ -105,11 +105,11 @@ function mtierCallOut(req,res)
      }
 
      });
-     };
+     };*/
 
     http.request(options,callback).on('error',function(err){console.log(err);}).end();
     http.request(options1,callback1).on('error',function(err){console.log(err);}).end();
-    http.request(options2,callback2).on('error',function(err){console.log(err);}).end();
+    //http.request(options2,callback2).on('error',function(err){console.log(err);}).end();
 
     function sendRespMultiInstance()
     {

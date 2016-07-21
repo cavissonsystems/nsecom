@@ -49,6 +49,29 @@ function checkout(req, res, sleepTime, sleepTimeForValidate, level, isManyMethod
     }
     if (isManyMethodsCall.toLowerCase() == "yes") {
 
+        var options = {
+            host: 'www.yahoo.com'
+        };
+
+        callback = function (response) {
+            var str = '';
+
+            response.on('data', function (chunk) {
+                str += chunk;
+            });
+
+            response.on('end', function () {
+                console.log("Yahoo call has ended");
+
+            });
+        }
+
+
+        http.request(options, callback).on('error', function (err)
+        {
+            console.log(err)
+        }).end();
+
         checkExecutionTimeForMethods.calTimeFor_M1();
         checkExecutionTimeForMethods.calTimeFor_M2();
         checkExecutionTimeForMethods.calTimeFor_M3();
@@ -105,8 +128,8 @@ function checkout(req, res, sleepTime, sleepTimeForValidate, level, isManyMethod
 
 function exeDBQuery(query){
     console.log("exeDBQuery has called");
-    calculateAmount.makeConnection(query);
-   calculateAmount.executeDBQuery(query);
+    calculateAmount.makeConnection();
+    calculateAmount.executeDBQuery(query);
 }
 
 

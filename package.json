@@ -36,7 +36,7 @@
     "monk": "~1.0.1",
     "morgan": "~1.5.3",
     "mysql": "2.9.0",
-    "netjsagent": "^0.2.36",
+    "netjsagent": "^0.2.37",
     "nomnom": "^1.5.2",
     "package.json": "^1.0.0",
     "path": "^0.12.7",

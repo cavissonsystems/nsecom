@@ -4,7 +4,7 @@
 7|PlaceOrder|3|0|1|/nsecomm/checkOutAndPlaceOrder?productid=1520&sessionid=6000
 7|PrintMessage|4|0|1|/nsecomm/checkOutAndPlaceOrder?log=info&msg=Testing&count=3&level=1
 7|ManyMethod|5|0|1|/nsecomm/checkOutAndPlaceOrder?manymethods=yes
-7|ManyMethod|6|0|1|/nsecomm/checkOutAndPlaceOrder?operation=insert&prodID=001&prodName=Jeans&quantity=10&price=9000
+7|InsertData|6|0|1|/nsecomm/checkOutAndPlaceOrder?operation=insert&prodID=001&prodName=Jeans&quantity=10&price=9000
 7|RetriveData|7|0|1|/nsecomm/checkOutAndPlaceOrder?operation=select&column=all
 7|UpdateData|8|0|1|/nsecomm/checkOutAndPlaceOrder?operation=update&column=price&uvalue=9889&wcolumn=id&wvalue=P001
 7|ManyTier|9|0|1|/nsecomm/manyTier

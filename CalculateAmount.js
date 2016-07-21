@@ -55,15 +55,19 @@ function validate(stime){
     }, stime);
 }
 
-CalculateAmount.makeConnection = function makeConnection(query)
+CalculateAmount.makeConnection = function makeConnection()
 {
-    var URL = "postgres://dqlwzcsbobhcci:Lcm2mB5bUamVHB6FiiYWw1Jdkc@ec2-54-221-253-117.compute-1.amazonaws.com:5432/d935m16il25m65";
-    pg.defaults.ssl = true;
+    try {
+        var URL = "postgres://dqlwzcsbobhcci:Lcm2mB5bUamVHB6FiiYWw1Jdkc@ec2-54-221-253-117.compute-1.amazonaws.com:5432/d935m16il25m65";
+        pg.defaults.ssl = true;
 
-    client = new pg.Client(URL);
-    client.connect();
+        client = new pg.Client(URL);
+        client.connect();
 
-    console.log("Connected");
+        console.log("Connected");
+    }
+    catch(err){console.log(err)}
+
 }
 
 CalculateAmount.executeDBQueryChange = function executeDBQueryChange(query) {
@@ -96,22 +100,22 @@ CalculateAmount.executeDBQueryChange = function executeDBQueryChange(query) {
 }
 
 CalculateAmount.executeDBQuery = function executeDBQuery(command){
+    try {
 
-    var query = client.query(command);
+        var query = client.query(command);
 
         query.on("row", function (row, result) {
-            console.log("hiiiiiii");
             result.addRow(row);
         });
         query.on("end", function (result) {
-            console.log("hiiiiiii 2222222222");
             console.log(JSON.stringify(result.rows, null, " ") + "\n");
             client.end();
-
         });
-        query.on('err', function (err) {
-            console.log(err);
+        query.on('error', function (error) {
+            console.log(error);
         });
+    }
+    catch(err){console.log(err)}
 
 
 }
