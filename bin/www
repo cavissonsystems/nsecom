@@ -11,7 +11,7 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3002');
+var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 var fs = require('fs');
@@ -19,9 +19,7 @@ var fs = require('fs');
 var cluster = require('cluster');
 var os      = require('os');
 
-var numCPUs = 1;
-
-/*
+var numCPUs = 4;
 if (cluster.isMaster) {
 
   for (var i = 0; i < numCPUs; i++) {
@@ -42,7 +40,7 @@ if (cluster.isMaster) {
   }
 
 } else {
-*/
+
 
 
   /**
@@ -127,6 +125,6 @@ if (cluster.isMaster) {
 
   }
 
-//}
+}
 
 

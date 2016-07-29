@@ -15,7 +15,7 @@ function makePostgresConnection(req, res)
 
         console.log("Connected");
 
-        var query = client.query("SELECT * FROM emp;");
+        var query = client.query("SELECT * FROM emp");
         query.on("row", function (row, result) {
             result.addRow(row);
         });
