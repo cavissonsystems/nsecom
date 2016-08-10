@@ -9,7 +9,6 @@ var router = express.Router();
 /* GET users listing. */
 router.get('/', function(req, res, next) {
 
-
         res.render('nsecomm', { title: 'nsecomm' });
     //console.trace("Trace of application");
 });

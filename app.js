@@ -22,6 +22,7 @@ var manyTier = require('./routes/manyTier');
 var multiClient = require('./routes/multiCallOut');
 var tierCallout_mongodb = require('./routes/mongoDB');
 var tierCallout_postgres = require('./routes/postgreSQL');
+var redis = require('./routes/redisRouter');
                  // start cpu profiling
 
 var mongo = require('mongodb');
@@ -56,6 +57,7 @@ app.use('/nsecomm/manyTier', manyTier);
 app.use('/nsecomm/HttpCallout',multiClient);
 app.use('/nsecomm/mongodb',tierCallout_mongodb);
 app.use('/nsecomm/postgres',tierCallout_postgres);
+app.use('/nsecomm/redis',redis);
 
 
 

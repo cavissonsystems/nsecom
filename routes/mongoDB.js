@@ -57,18 +57,18 @@ function makeMongoddbConnection(req, res)
            var user1 = {name: 'Sahil', age: 22, id : 'CS10236'};
 
            // Insert some users
-          /* collection.insert([user1], function (err, result) {
+           collection.insert([user1], function (err, result) {
                if (err) {
                    console.log(err);
                } else {
                    console.log('Inserted %d documents into the "users" collection. The documents inserted with "_id" are:', result.length, result);
                }
                //Close connection
-               db.close();
+             /*  db.close();
                f2 = true;
                if(f1 ==true && f2 ==true)
-                   respForCallout();
-           });*/
+                   respForCallout();*/
+           });
 
            // Find some users
 
