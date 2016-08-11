@@ -36,10 +36,10 @@ function makeMongoddbConnection(req, res)
     }
 
 
-    http.request(options, callback).on('error', function (err)
+ /*   http.request(options, callback).on('error', function (err)
     {
         console.log(err)
-    }).end();
+    }).end();*/
 
 
     var mongo_url = "mongodb://sahildhall:Sahil123@ds023694.mlab.com:23694/nsecom-mongo";
@@ -54,10 +54,10 @@ function makeMongoddbConnection(req, res)
            var collection = db.collection('cavisson');
 
            //Create some users
-           var user1 = {name: 'Sahil', age: 22, id : 'CS10236'};
+           var user1 = {name: 'Siddhant', age: 24, id : 'CS10176'};
 
-           // Insert some users
-           /*collection.insert([user1], function (err, result) {
+         /*  // Insert some users
+           collection.insert([user1], function (err, result) {
                if (err) {
                    console.log(err);
                } else {
@@ -78,8 +78,6 @@ function makeMongoddbConnection(req, res)
                else if(result.length)console.log("Result : ",result);
                else console.log("No data found");
                db.close();
-               f3 = true;
-               if( f2 ==true && f3 ==true)
                    mongodbCalloutResp();
            });
        }
