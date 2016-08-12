@@ -30,167 +30,184 @@ function productInfo() {
     }, 2000);
 }
 function checkout(req, res, sleepTime, sleepTimeForValidate, level, isManyMethodsCall) {
-    setTimeout(function() {
-    }, 13000);
-    // log.info("checkOut() sleep time for cc =" + sleepTimeForCC + "sleep time for validate = " + sleepTimeForValidate + " level = " + level);
-    if (level >= 1) productInfo();
-    if (level >= 2) availabilityCheck();
-    if (level >= 3)
-        calculateAmount.calculateAmt();
-    if (level >= 4)
-        calculateAmount.chargeCreditCard(sleepTime, sleepTimeForValidate);
-    if (level >= 5) {
-        //calculateAmount.makeConnection();
-        //calculateAmount.connectToCCAuthCenter();
-    }
-    if (level >= 6) {
-        placeOrder.fullfillOrder();
-        updateCheckOut.updateCheckOutStats();
-    }
-    if (isManyMethodsCall.toLowerCase() == "yes") {
-
-        var options = {
-            host: 'www.yahoo.com'
-        };
-
-        callback = function (response) {
-            var str = '';
-
-            response.on('data', function (chunk) {
-                str += chunk;
-            });
-
-            response.on('end', function () {
-                console.log("Yahoo call has ended");
-
-            });
+    try {
+        setTimeout(function () {
+        }, 13000);
+        // log.info("checkOut() sleep time for cc =" + sleepTimeForCC + "sleep time for validate = " + sleepTimeForValidate + " level = " + level);
+        if (level >= 1) productInfo();
+        if (level >= 2) availabilityCheck();
+        if (level >= 3)
+            calculateAmount.calculateAmt();
+        if (level >= 4)
+            calculateAmount.chargeCreditCard(sleepTime, sleepTimeForValidate);
+        if (level >= 5) {
+            //calculateAmount.makeConnection();
+            //calculateAmount.connectToCCAuthCenter();
         }
+        if (level >= 6) {
+            placeOrder.fullfillOrder();
+            updateCheckOut.updateCheckOutStats();
+        }
+        if (isManyMethodsCall.toLowerCase() == "yes") {
+
+            var options = {
+                host: 'www.yahoo.com'
+            };
+
+            callback = function (response) {
+                var str = '';
+
+                response.on('data', function (chunk) {
+                    str += chunk;
+                });
+
+                response.on('end', function () {
+                    console.log("Yahoo call has ended");
+
+                });
+            }
 
 
-        http.request(options, callback).on('error', function (err)
-        {
-            console.log(err)
-        }).end();
+            http.request(options, callback).on('error', function (err) {
+                console.log(err)
+            }).end();
 
-        checkExecutionTimeForMethods.calTimeFor_M1();
-        checkExecutionTimeForMethods.calTimeFor_M2();
-        checkExecutionTimeForMethods.calTimeFor_M3();
-        checkExecutionTimeForMethods.calTimeFor_M4();
-        checkExecutionTimeForMethods.calTimeFor_M5();
-        checkExecutionTimeForMethods.calTimeFor_M6();
-        checkExecutionTimeForMethods.calTimeFor_M7();
-        checkExecutionTimeForMethods.calTimeFor_M8();
-        checkExecutionTimeForMethods.calTimeFor_M9();
-        checkExecutionTimeForMethods.calTimeFor_M10();
-        checkExecutionTimeForMethods.calTimeFor_M11();
-        checkExecutionTimeForMethods.calTimeFor_M12();
-        checkExecutionTimeForMethods.calTimeFor_M13();
-        checkExecutionTimeForMethods.calTimeFor_M14();
-        checkExecutionTimeForMethods.calTimeFor_M15();
-        checkExecutionTimeForMethods.calTimeFor_M16();
-        checkExecutionTimeForMethods.calTimeFor_M17();
-        checkExecutionTimeForMethods.calTimeFor_M18();
-        checkExecutionTimeForMethods.calTimeFor_M19();
-        checkExecutionTimeForMethods.calTimeFor_M20();
-        checkExecutionTimeForMethods.calTimeFor_M21();
-        checkExecutionTimeForMethods.calTimeFor_M22();
-        checkExecutionTimeForMethods.calTimeFor_M23();
-        checkExecutionTimeForMethods.calTimeFor_M24();
-        checkExecutionTimeForMethods.calTimeFor_M25();
-        checkExecutionTimeForMethods.calTimeFor_M26();
-        checkExecutionTimeForMethods.calTimeFor_M27();
-        checkExecutionTimeForMethods.calTimeFor_M28();
-        checkExecutionTimeForMethods.calTimeFor_M29();
-        checkExecutionTimeForMethods.calTimeFor_M30();
-        checkExecutionTimeForMethods.calTimeFor_M31();
-        checkExecutionTimeForMethods.calTimeFor_M32();
-        checkExecutionTimeForMethods.calTimeFor_M33();
-        checkExecutionTimeForMethods.calTimeFor_M34();
-        checkExecutionTimeForMethods.calTimeFor_M35();
-        checkExecutionTimeForMethods.calTimeFor_M36();
-        checkExecutionTimeForMethods.calTimeFor_M37();
-        checkExecutionTimeForMethods.calTimeFor_M38();
-        checkExecutionTimeForMethods.calTimeFor_M39();
-        checkExecutionTimeForMethods.calTimeFor_M40();
-        checkExecutionTimeForMethods.calTimeFor_M41();
-        checkExecutionTimeForMethods.calTimeFor_M42();
-        checkExecutionTimeForMethods.calTimeFor_M43();
-        checkExecutionTimeForMethods.calTimeFor_M44();
-        checkExecutionTimeForMethods.calTimeFor_M45();
-        checkExecutionTimeForMethods.calTimeFor_M46();
-        checkExecutionTimeForMethods.calTimeFor_M47();
-        checkExecutionTimeForMethods.calTimeFor_M48();
-        checkExecutionTimeForMethods.calTimeFor_M49();
-        checkExecutionTimeForMethods.calTimeFor_M50();
+            checkExecutionTimeForMethods.calTimeFor_M1();
+            checkExecutionTimeForMethods.calTimeFor_M2();
+            checkExecutionTimeForMethods.calTimeFor_M3();
+            checkExecutionTimeForMethods.calTimeFor_M4();
+            checkExecutionTimeForMethods.calTimeFor_M5();
+            checkExecutionTimeForMethods.calTimeFor_M6();
+            checkExecutionTimeForMethods.calTimeFor_M7();
+            checkExecutionTimeForMethods.calTimeFor_M8();
+            checkExecutionTimeForMethods.calTimeFor_M9();
+            checkExecutionTimeForMethods.calTimeFor_M10();
+            checkExecutionTimeForMethods.calTimeFor_M11();
+            checkExecutionTimeForMethods.calTimeFor_M12();
+            checkExecutionTimeForMethods.calTimeFor_M13();
+            checkExecutionTimeForMethods.calTimeFor_M14();
+            checkExecutionTimeForMethods.calTimeFor_M15();
+            checkExecutionTimeForMethods.calTimeFor_M16();
+            checkExecutionTimeForMethods.calTimeFor_M17();
+            checkExecutionTimeForMethods.calTimeFor_M18();
+            checkExecutionTimeForMethods.calTimeFor_M19();
+            checkExecutionTimeForMethods.calTimeFor_M20();
+            checkExecutionTimeForMethods.calTimeFor_M21();
+            checkExecutionTimeForMethods.calTimeFor_M22();
+            checkExecutionTimeForMethods.calTimeFor_M23();
+            checkExecutionTimeForMethods.calTimeFor_M24();
+            checkExecutionTimeForMethods.calTimeFor_M25();
+            checkExecutionTimeForMethods.calTimeFor_M26();
+            checkExecutionTimeForMethods.calTimeFor_M27();
+            checkExecutionTimeForMethods.calTimeFor_M28();
+            checkExecutionTimeForMethods.calTimeFor_M29();
+            checkExecutionTimeForMethods.calTimeFor_M30();
+            checkExecutionTimeForMethods.calTimeFor_M31();
+            checkExecutionTimeForMethods.calTimeFor_M32();
+            checkExecutionTimeForMethods.calTimeFor_M33();
+            checkExecutionTimeForMethods.calTimeFor_M34();
+            checkExecutionTimeForMethods.calTimeFor_M35();
+            checkExecutionTimeForMethods.calTimeFor_M36();
+            checkExecutionTimeForMethods.calTimeFor_M37();
+            checkExecutionTimeForMethods.calTimeFor_M38();
+            checkExecutionTimeForMethods.calTimeFor_M39();
+            checkExecutionTimeForMethods.calTimeFor_M40();
+            checkExecutionTimeForMethods.calTimeFor_M41();
+            checkExecutionTimeForMethods.calTimeFor_M42();
+            checkExecutionTimeForMethods.calTimeFor_M43();
+            checkExecutionTimeForMethods.calTimeFor_M44();
+            checkExecutionTimeForMethods.calTimeFor_M45();
+            checkExecutionTimeForMethods.calTimeFor_M46();
+            checkExecutionTimeForMethods.calTimeFor_M47();
+            checkExecutionTimeForMethods.calTimeFor_M48();
+            checkExecutionTimeForMethods.calTimeFor_M49();
+            checkExecutionTimeForMethods.calTimeFor_M50();
+        }
+    }
+    catch(err)
+    {
+        console.log("Error in checkout : "+err);
     }
 }
 
 
 function exeDBQuery(query){
-    console.log("exeDBQuery has called");
-    calculateAmount.makeConnection();
-    calculateAmount.executeDBQuery(query);
+    try {
+        console.log("exeDBQuery has called");
+        calculateAmount.makeConnection();
+        calculateAmount.executeDBQuery(query);
+    }
+    catch(err)
+    {
+        console.log("Error in exeDBQuery : "+err);
+    }
+
 }
 
 
 function dbOperation(operation, productID, productName, column, uvalue, wcolumn, wvalue, quantity, price){
-    console.log("dbOperation has called");
-    query = null;
-    if(operation == "insert"){
-        if(productID != null && productName != null && quantity != 0 && price != 0){
-            var query = "INSERT INTO purchaseorder VALUES ('" + productID + "','" + productName + "'," + quantity + "," +  price+ ")";
-            calculateAmount.makeConnection();
-            calculateAmount.executeDBQueryChange(query);
-        }
-    } else if(operation == "select") {
-        if (column != null) {
-            if (column == "all") {
-                query = "SELECT * from purchaseorder";
-            } else {
-                query = "SELECT" + " " + column + " from purchaseorder";
+    try {
+        console.log("dbOperation has called");
+        query = null;
+        if (operation == "insert") {
+            if (productID != null && productName != null && quantity != 0 && price != 0) {
+                var query = "INSERT INTO purchaseorder VALUES ('" + productID + "','" + productName + "'," + quantity + "," + price + ")";
+                calculateAmount.makeConnection();
+                calculateAmount.executeDBQueryChange(query);
             }
-            calculateAmount.makeConnection();
-            calculateAmount.executeDBQueryChange(query);
-
-
-        }
-    } else if(operation == "update") {
-        if(column != null && uvalue != null && wcolumn != null && wvalue != null){
-            query = "UPDATE purchaseorder ";
-            if(column == "price" || column == "quantity"){
-                var updateValue = parseInt(uvalue);
-                query = query + "SET " + column + "=" + updateValue;
-            } else {
-                query = query + "SET " + column + "='" + uvalue + "'";
-            }
-            if(wcolumn == "price" || wcolumn == "quantity"){
-                var whereValue = parseInt(wvalue);
-                query = query + " where " + wcolumn + "=" + whereValue;
-            } else {
-                query = query + " where " + wcolumn + "='" + wvalue +"'";
-            }
-            calculateAmount.makeConnection();
-            calculateAmount.executeDBQueryChange(query);
-        }
-    }else if(operation == "delete"){
-        query = "DELETE FROM purchaseorder WHERE ";
-        if(wcolumn != null && wvalue != null || column != null){
-            if(wcolumn != null && wvalue != null) {
-                if(wcolumn == "price" || wcolumn == "quantity"){
-                    var whereValue = parseInt(wvalue);
-                    query = query + wcolumn + "=" + whereValue;
+        } else if (operation == "select") {
+            if (column != null) {
+                if (column == "all") {
+                    query = "SELECT * from purchaseorder";
                 } else {
-                    query = query + wcolumn + "='" + wvalue +"'";
+                    query = "SELECT" + " " + column + " from purchaseorder";
                 }
+                calculateAmount.makeConnection();
+                calculateAmount.executeDBQueryChange(query);
+
+
             }
-            if(column != null){
-                query = "TRUNCATE purchaseorder";
+        } else if (operation == "update") {
+            if (column != null && uvalue != null && wcolumn != null && wvalue != null) {
+                query = "UPDATE purchaseorder ";
+                if (column == "price" || column == "quantity") {
+                    var updateValue = parseInt(uvalue);
+                    query = query + "SET " + column + "=" + updateValue;
+                } else {
+                    query = query + "SET " + column + "='" + uvalue + "'";
+                }
+                if (wcolumn == "price" || wcolumn == "quantity") {
+                    var whereValue = parseInt(wvalue);
+                    query = query + " where " + wcolumn + "=" + whereValue;
+                } else {
+                    query = query + " where " + wcolumn + "='" + wvalue + "'";
+                }
+                calculateAmount.makeConnection();
+                calculateAmount.executeDBQueryChange(query);
             }
-            calculateAmount.makeConnection();
-            calculateAmount.executeDBQueryChange(query);
+        } else if (operation == "delete") {
+            query = "DELETE FROM purchaseorder WHERE ";
+            if (wcolumn != null && wvalue != null || column != null) {
+                if (wcolumn != null && wvalue != null) {
+                    if (wcolumn == "price" || wcolumn == "quantity") {
+                        var whereValue = parseInt(wvalue);
+                        query = query + wcolumn + "=" + whereValue;
+                    } else {
+                        query = query + wcolumn + "='" + wvalue + "'";
+                    }
+                }
+                if (column != null) {
+                    query = "TRUNCATE purchaseorder";
+                }
+                calculateAmount.makeConnection();
+                calculateAmount.executeDBQueryChange(query);
+            }
         }
     }
-
+    catch(err)
+    {
+        console.log("Error in dbOperation : "+err);
+    }
 
 }
 /* GET users listing. */

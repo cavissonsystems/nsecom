@@ -15,56 +15,64 @@ var f2 = false;
 
 function multiHttpConnection(req, res) {
     console.log("availabilityCheck has called");
-    var options = {
-        host: 'www.gmail.com'};
+    try {
+        var options = {
+            host: 'www.gmail.com'
+        };
 
-    var options1 = {
-        host : 'www.google.com'
-    };
+        var options1 = {
+            host: 'www.google.com'
+        };
 
-    callback = function(response) {
-        var str = '';
+        callback = function (response) {
+            var str = '';
 
-        //another chunk of data has been recieved, so append it to `str`
-        response.on('data', function (chunk) {
-            str += chunk;
-        });
+            //another chunk of data has been recieved, so append it to `str`
+            response.on('data', function (chunk) {
+                str += chunk;
+            });
 
-        //the whole response has been recieved, so we just print it out here
-        response.on('end', function() {
-            console.log("Gmail call has ended");
-            f1 = true;
-            if(f1 == true && f2 == true  )
-            {
+            //the whole response has been recieved, so we just print it out here
+            response.on('end', function () {
+                console.log("Gmail call has ended");
+                f1 = true;
+                if (f1 == true && f2 == true) {
+                    sendResp();
+                }
+                //http.request(options1, callback1).end();
+
+            });
+        }
+
+        callback1 = function (response) {
+            var str = '';
+
+            //another chunk of data has been recieved, so append it to `str`
+            response.on('data', function (chunk) {
+                str += chunk;
+            });
+
+            //the whole response has been recieved, so we just print it out here
+            response.on('end', function () {
+                //res.render('checkout');
+                console.log("Google call has ended");
+                //     f2 = true;
+                //   if(f1 == true && f2 == true ) {
                 sendResp();
-            }
-            //http.request(options1, callback1).end();
+                // }
 
-        });
+            });
+        };
+
+        //http.request(options, callback).on('error',function(err){console.log(err)}).end();
+        http.request(options1, callback1).on('error', function (err) {
+            console.log(err)
+        }).end();
     }
-
-    callback1 = function(response) {
-        var str = '';
-
-        //another chunk of data has been recieved, so append it to `str`
-        response.on('data', function (chunk) {
-            str += chunk;
-        });
-
-        //the whole response has been recieved, so we just print it out here
-        response.on('end', function() {
-            //res.render('checkout');
-            console.log("Google call has ended");
-            f2 = true;
-            if(f1 == true && f2 == true ) {
-                sendResp();
-            }
-
-        });
-    };
-
-     http.request(options, callback).on('error',function(err){console.log(err)}).end();
-     http.request(options1, callback1).on('error', function(err){console.log(err)}).end();
+    catch(err)
+    {
+        console.log("error in making http calls : "+err)
+    }
 
 
 

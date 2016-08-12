@@ -8,43 +8,47 @@ var redis = require('redis');
 
 function createRedisConnection (req,res)
 {
+    try {
 
-    var client = redis.createClient('//redis-17593.c8.us-east-1-3.ec2.cloud.redislabs.com:17593', {no_ready_check: true});
+        var client = redis.createClient('//redis-17593.c8.us-east-1-3.ec2.cloud.redislabs.com:17593', {no_ready_check: true});
 
-    client.auth('Sahil@123', function (err) {
-        if (err)  throw err;
-    });
+        client.auth('Sahil@123', function (err) {
+            if (err)  throw err;
+        });
 
-    client.on('connect', function(err) {
-        if(err) throw  err;
-        console.log('connected');
-    });
+        client.on('connect', function (err) {
+            if (err) throw  err;
+            console.log('connected');
+        });
 
 
+        client.set('sahil', 'dhall'/*,function(err,rply)
+         {
+         if(err)
+         console.log(err)
 
-    client.set('sahil','dhall'/*,function(err,rply)
+         console.log(rply.toString());
+         }*/)
+
+        client.get('sahil', function (err, rply) {
+            if (err)
+                console.log(err)
+
+            console.log(rply);
+            client.hmset(['framework', 'angular', 'bootstrap', 'express', 'node']/*, function (err,rply) {
+             console.log(rply.toString())
+             }*/);
+
+            client.hgetall('framework', function (err, data) {
+                console.log(data)
+                redisCallout(res);
+            })
+        });
+    }
+    catch(err)
     {
-        if(err)
-            console.log(err)
-
-        console.log(rply.toString());
-    }*/)
-
-    client.get('sahil',function(err,rply)
-    {
-        if(err)
-            console.log(err)
-
-        console.log(rply);
-        client.hmset(['framework','angular','bootstrap','express','node']/*, function (err,rply) {
-            console.log(rply.toString())
-        }*/);
-
-        client.hgetall('framework', function (err,data) {
-            console.log(data)
-            redisCallout(res);
-        })
-    });
+        console.log("Error in connecting with redis : "+err);
+    }
 
     function redisCallout (res)
     {

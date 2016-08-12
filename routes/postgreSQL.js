@@ -6,9 +6,12 @@ var router = express.Router();
 var pg = require('pg');
 function makePostgresConnection(req, res)
 {
+    var URL = "postgres://dqlwzcsbobhcci:Lcm2mB5bUamVHB6FiiYWw1Jdkc@ec2-54-221-253-117.compute-1.amazonaws.com:5432/d935m16il25m65";
+    pg.defaults.ssl = true;
+/*
     try {
-        var URL = "postgres://dqlwzcsbobhcci:Lcm2mB5bUamVHB6FiiYWw1Jdkc@ec2-54-221-253-117.compute-1.amazonaws.com:5432/d935m16il25m65";
-        pg.defaults.ssl = true;
+
+
 
         var client = new pg.Client(URL);
         client.connect();
@@ -21,6 +24,7 @@ function makePostgresConnection(req, res)
         });
         query.on("end", function (result) {
 
+            //done();
             client.end();
             console.log(JSON.stringify(result.rows, null, " ") + "\n");
 
@@ -31,29 +35,35 @@ function makePostgresConnection(req, res)
         });
     }
     catch(err) {console.log(err);}
-
+*/
 //22222222222222222222222222222
-    /*pg.connect(URL,function(err,client)
-     {
-     if(err) throw err;
+    try {
+        pg.connect(URL, function (err, client,done)
+        {
+            if (err)
+                return console.log("can not connect with pg : "+err);
 
-     console.log("Connected successfully to : "+URL);
+            console.log("Connected successfully to : " + URL);
 
-     client
-     .query('SELECT * FROM emp;')
-     .on('row',function(data)
-     {
-     console.log(JSON.stringify(data));
-     })
-     .on('end',function()
-     {
-     client.end();
-     pgCalloutResp();
-     })
-     .on('err', function (err) {
-     console.log(err);
-     })
-     });*/
+            client
+                .query('SELECT * FROM emp;')
+                .on('row', function (data) {
+                    console.log(JSON.stringify(data));
+                })
+                .on('end', function () {
+                    done();
+                    client.end();
+                    pgCalloutResp();
+                })
+                .on('err', function (err) {
+                    console.log(err);
+                })
+        });
+    }
+    catch(err)
+    {
+        console.log("Error in connecting with PG: "+err)
+    }
     function pgCalloutResp()
     {
         res.render('mongodb',{DB: 'PosetGreSQL !'}) ;
