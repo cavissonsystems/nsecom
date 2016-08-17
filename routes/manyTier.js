@@ -20,11 +20,7 @@ function multiHttpConnection(req, res) {
             host: 'www.gmail.com'
         };
 
-        var options1 = {
-            host: 'www.google.com'
-        };
-
-        callback = function (response) {
+        /*callback = function (response) {
             var str = '';
 
             //another chunk of data has been recieved, so append it to `str`
@@ -42,20 +38,26 @@ function multiHttpConnection(req, res) {
                 //http.request(options1, callback1).end();
 
             });
-        }
+        }*/
 
+        var options1 = {
+            host: 'www.google.com',
+            headers : {
+                'Connection' : 'keep-alive'
+            }
+        };
         callback1 = function (response) {
             var str = '';
 
             //another chunk of data has been recieved, so append it to `str`
             response.on('data', function (chunk) {
-                str += chunk;
+            //    str += chunk;
             });
 
             //the whole response has been recieved, so we just print it out here
             response.on('end', function () {
-                //res.render('checkout');
-                console.log("Google call has ended");
+
+                //console.log("Google call has ended");
                 //     f2 = true;
                 //   if(f1 == true && f2 == true ) {
                 sendResp();
@@ -78,8 +80,6 @@ function multiHttpConnection(req, res) {
 
 function sendResp(){
         res.render('checkout');
-     f1 = false;
-     f2 = false;
 };
 
 

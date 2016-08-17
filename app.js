@@ -1,13 +1,12 @@
 var netjsagent = require('netjsagent').instrument();      // for instrumenting application
+
 process.on('uncaughtException', function (err) {
   console.log((new Date).toUTCString() + ' uncaughtException:', err.message);
   console.log(err.stack);
-  process.exit(1)
 });
 
 var express = require('express');
 var path = require('path');
-var domain = require('domain');
 
 //var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -23,12 +22,10 @@ var multiClient = require('./routes/multiCallOut');
 var tierCallout_mongodb = require('./routes/mongoDB');
 var tierCallout_postgres = require('./routes/postgreSQL');
 var redis = require('./routes/redisRouter');
-                 // start cpu profiling
 
 var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/untitled1');
-
 var app = express();
 
 // view engine setup
@@ -45,20 +42,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Make our db accessible to our router
 app.use(function(req,res,next){
-  req.db = db;
-  next();
+    req.db = db;
+    next();
 });
+
 
 app.use('/', routes);
 app.use('/users', users);
 app.use('/nsecomm', nsecomm);
-app.use('/nsecomm/checkOutAndPlaceOrder', checkOutOrder);
-app.use('/nsecomm/manyTier', manyTier);
+app.use('/nsecomm/checkOutAndPlaceOrder',checkOutOrder);
+app.use('/nsecomm/manyTier',manyTier);
 app.use('/nsecomm/HttpCallout',multiClient);
 app.use('/nsecomm/mongodb',tierCallout_mongodb);
 app.use('/nsecomm/postgres',tierCallout_postgres);
 app.use('/nsecomm/redis',redis);
-
 
 
 // catch 404 and forward to error handler

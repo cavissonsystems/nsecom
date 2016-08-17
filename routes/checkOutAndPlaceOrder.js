@@ -51,26 +51,29 @@ function checkout(req, res, sleepTime, sleepTimeForValidate, level, isManyMethod
         if (isManyMethodsCall.toLowerCase() == "yes") {
 
             var options = {
-                host: 'www.yahoo.com'
+                host: 'www.yahoo.com',
+                headers : {
+                    'Connection' : 'keep-alive'
+                }
             };
 
             callback = function (response) {
-                var str = '';
+                //var str = '';
 
-                response.on('data', function (chunk) {
-                    str += chunk;
-                });
+                //response.on('data', function (chunk) {
+                //    str += chunk;
+                //});
 
                 response.on('end', function () {
-                    console.log("Yahoo call has ended");
+                   // console.log("Yahoo call has ended");
 
                 });
             }
 
 
-            http.request(options, callback).on('error', function (err) {
-                console.log(err)
-            }).end();
+            //http.request(options, callback).on('error', function (err) {
+            //    console.log(err)
+            //}).end();
 
             checkExecutionTimeForMethods.calTimeFor_M1();
             checkExecutionTimeForMethods.calTimeFor_M2();

@@ -48,12 +48,6 @@ var numCPUs = 4;
    */
   var server = http.createServer(app);
 
-  process.on('uncaughtException', function (err) {
-    console.log((new Date).toUTCString() + ' uncaughtException:', err.message);
-    console.log(err.stack);
-    process.exit(1)
-  });
-
 
   /**
    * Listen on provided port, on all network interfaces.
