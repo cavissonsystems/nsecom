@@ -40,7 +40,7 @@ for(var i=0;i<=10;i++){
         pool.connect(function (err, client,done) {
 
             if (err)
-                return console.log("Not connected with pgdb");
+                return ;
 
             //console.log("Connected successfully to pgdb ");
 
@@ -64,9 +64,6 @@ for(var i=0;i<=10;i++){
     }
 
 }
-
-console.log("Initialized pool")
-
 
 function makePostgresConnection(req, res)
 {

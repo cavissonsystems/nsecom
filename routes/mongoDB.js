@@ -18,7 +18,6 @@ try {
             return;
 
         db = database;
-        console.log("Connected successfully to mongodb ");
     });
 }
 catch(err)
@@ -43,7 +42,7 @@ function makeMongoddbConnection(req, res)
                 }
 
                 if (result.length) {
-                    console.log("Result : ", result);
+                  //  console.log("Result : ", result);
                 }
                 else {
                     collection.insert([user1], function (err, result) {
