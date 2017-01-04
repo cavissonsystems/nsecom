@@ -1,0 +1,63 @@
+html
+  head
+    title NSEcom home page
+    style.
+      #navcontainer ul
+      {
+        align:center;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        text-align: center;
+      }
+      #navcontainer ul li { display: inline; }
+      #navcontainer ul li a
+      {
+        text-decoration: none;
+        padding: .2em 1em;
+        color: #fff;
+        background-color: #5B88C0;
+      }
+      #navcontainer ul li a:hover
+      {
+        color: #fff;
+        background-color: #B75A00;
+      }
+  body(bgcolor='#E6E6FA', leftmargin='0', topmargin='0', marginwidth='0', marginheight='0')
+    table(border='0', width='100%')
+      tr
+        td
+          table(border='0', width='60%', align='center')
+            tr
+              br
+              td(width='45%', align='right')
+                img(src='../images/nsecomlogo.png')
+              td(width='10%')
+                input#keyword(type='text', style='font-size:16px;', name='keyword')
+              td(width='45%')
+                  input#srch(type='button', onclick='openUrl()', value='Search')
+      tr
+        td
+          table(border='0', width='60%', align='center')
+            tr
+              td(align='center')
+                #navcontainer(align='center')
+                  ul
+                    li
+                      a(href='#')       Gift Shop
+                    li
+                      a(href='#')    Women
+                    li
+                      a(href='#')       Men
+                    li
+                      a(href='#')       Shoes
+                    li
+                      a(href='#')       Home Accents
+                    li
+                      a(href='#')    New Items
+            table
+    script.
+      function openUrl() {
+        var id = "/nsecomm/searchProduct?keyword=" +document.getElementById("keyword").value;
+        window.open(id,"_self");
+      }
