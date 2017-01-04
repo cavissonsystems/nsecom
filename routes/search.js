@@ -32,21 +32,22 @@ function prodProcess(req,res, keyword, prodid, upc, image, price, description)
             path: '/nsecom/searchProduct?keyword='+keyword
         };
 
-        callback = function (res) {
+        callback = function (resp) {
             var data = "";
-            res.on('data', function (chunk) {
+            resp.on('data', function (chunk) {
                 data += chunk;
             });
-            res.on('end', function () {
-		console.log("Getting data from java server & setting data in DB");
+            resp.on('end', function () {
+		        //console.log("Getting data from java server & setting data in DB");
                 client.set([keyword , data]);
-
-                data.forEach(function(data)
-                {
-                    client.set([data.prodId , data])
-                })
-
+                client.expire(keyword,10);
                 products = JSON.parse(data);
+                /*products.forEach(function(data)
+                {
+                    console.log(data)
+                    client.set([data.prodId , data])
+                });*/
+
 		        res.render('search', {"products" : products});
             });
         };
@@ -67,25 +68,27 @@ function prodProcess(req,res, keyword, prodid, upc, image, price, description)
 
 router.get('/',function(req,res,next)
 {
-    var keyword, prodid, upc, image, price, description;
-    keyword = req.query.keyword;
-    prodid = req.query.prodid;
-    upc = req.query.upc;
-    image = req.query.image;
-    price = req.query.price;
-    description = req.query.description;
+    try {
+        var keyword, prodid, upc, image, price, description;
+        keyword = req.query.keyword;
+        prodid = req.query.prodid;
+        upc = req.query.upc;
+        image = req.query.image;
+        price = req.query.price;
+        description = req.query.description;
 
-    client.get(keyword,function(err,data){
-        if(data) {
-            console.log("Getting dAta from redis server",data);
-            products = JSON.parse(data);
-            res.render('search', {"products" : products});
-        }
-        else{
-	 	prodProcess(req,res,keyword, prodid, upc, image, price, description);
-        }
-    })
-
+        client.get(keyword, function (err, data) {
+            if (data) {
+                //console.log("Getting dAta from redis server");
+                products = JSON.parse(data);
+                res.render('search', {"products": products});
+            }
+            else {
+                prodProcess(req, res, keyword, prodid, upc, image, price, description);
+            }
+        })
+    }
+    catch(e){console.log(e)}
 });
 
 module.exports = router;
