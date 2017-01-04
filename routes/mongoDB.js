@@ -6,6 +6,8 @@
 var express = require ('express');
 var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
+var mongoose = require('mongoose');//mongo connection,
+
 
 var http = require('http');
 var f2 = false;
@@ -56,6 +58,34 @@ function makeMongoddbConnection(req, res)
                 //db.close();
                 mongodbCalloutResp();
           });
+        /*mongoose.model('Blob').create({
+            name : 'sahil',
+            age : 45
+        }, function (err, blob) {
+            if (err) {
+                res.send("There was a problem adding the information to the database.");
+            } else {
+                //Blob has been created
+                console.log('POST creating new blob: ' + blob);
+                mongoose.model('Blob').findById(blob.id,function(err,blob)
+                {
+                    if(err)
+                    {
+                        res.send("There was a problem adding the information to the database.");
+                    }
+                    if(blob)
+                    {
+                        mongoose.model('Blob').remove(blob,function(err){
+                            if(err)
+                                res.send("There was a problem adding the information to the database.");
+
+                            console.log("deleted successfully : ",blob)
+                            mongodbCalloutResp();
+                        })
+                    }
+                })
+            }
+        })*/
     }
     catch(err){
         console.log("Error in connecting with mongodb : "+err);

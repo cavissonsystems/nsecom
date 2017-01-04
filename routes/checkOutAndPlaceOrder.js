@@ -12,10 +12,19 @@ var http = require('http');
 
 function availabilityCheck(req, res) {
     console.log("availabilityCheck has called");
+try{
+   x();
+}catch(err){
+console.log("custom error has called");
+}
 
     setTimeout(function() {
     }, 13000);
     checkStoreInventory();
+}
+
+function x(){
+throw new Error("Custom Error");
 }
 
 

@@ -36,18 +36,18 @@ function mtierCallOut(req,res)
 {
     try {
 
-        //var options = file_map['1'];
-        //var options1 = file_map['2'];
-        var options =
+        var options = file_map['1'];
+        var options1 = file_map['2'];
+        /*var options =
          {host: '127.0.0.1',
-         port: '7001',
-         path: 'Sahil_nsecom/checkOutAndPlaceOrder?manymethods=yes'};
+         port: '3001',
+         path: '/nsecomm/manyTier'};
 
          var options1 = { host: '127.0.0.1',
          port: '3002',
-         path: '/nsecomm/manyTier_yahoo'};
+         path: '/nsecomm/manyTier_yahoo'};*/
 
-         var options2 = file_map['3'];
+        //var options2 = file_map['3'];
 
         callback = function (res) {
             var data = "";
@@ -55,7 +55,7 @@ function mtierCallOut(req,res)
                 data += chunk;
             });
             res.on('end', function () {
-                console.log("java_agent is called");
+                console.log("Node_1 is called");
                 sendRespMultiInstance();
                 /* f1 = true;
                  if(f1 == true && f2 == true ) {
@@ -82,7 +82,7 @@ function mtierCallOut(req,res)
         };
 
 
-         callback2 = function(res)
+        /* callback2 = function(res)
          {
          var data = "";
          res.on('data',function(chunk)
@@ -100,14 +100,14 @@ function mtierCallOut(req,res)
          }
 
          });
-         };
+         };*/
 
         http.request(options, callback).on('error', function (err) {
             console.log(err);
         }).end();
-        /*http.request(options1, callback1).on('error', function (err) {
+        http.request(options1, callback1).on('error', function (err) {
             console.log(err);
-        }).end();*/
+        }).end();
         //http.request(options2,callback2).on('error',function(err){console.log(err);}).end();
     }
     catch(err)

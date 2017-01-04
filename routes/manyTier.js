@@ -20,7 +20,7 @@ function multiHttpConnection(req, res) {
             host: 'www.gmail.com'
         };
 
-        /*callback = function (response) {
+        callback = function (response) {
             var str = '';
 
             //another chunk of data has been recieved, so append it to `str`
@@ -31,17 +31,18 @@ function multiHttpConnection(req, res) {
             //the whole response has been recieved, so we just print it out here
             response.on('end', function () {
                 console.log("Gmail call has ended");
+		//sendResp();
                 f1 = true;
                 if (f1 == true && f2 == true) {
-                    sendResp();
+                    //sendResp();
                 }
                 //http.request(options1, callback1).end();
 
             });
-        }*/
+        };
 
         var options1 = {
-            host: 'www.google.com',
+            host: 'www.google.coma',
             headers : {
                 'Connection' : 'keep-alive'
             }
@@ -65,11 +66,16 @@ function multiHttpConnection(req, res) {
 
             });
         };
+	http.request(options);
+	sendResp();
+	//http.request(options1);
 
         //http.request(options, callback).on('error',function(err){console.log(err)}).end();
-        http.request(options1, callback1).on('error', function (err) {
-            console.log(err)
-        }).end();
+        //http.request(options1, callback1).on('error', function (err) {
+          //  f2 = true;
+           // console.log(err);
+           // sendResp();
+       // }).end();
     }
     catch(err)
     {

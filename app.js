@@ -1,4 +1,4 @@
-var netjsagent = require('netjsagent').instrument();      // for instrumenting application
+var netjsagent = require('netjsagent').instrument({logLevel:'debug'});      // for instrumenting application
 
 process.on('uncaughtException', function (err) {
   console.log((new Date).toUTCString() + ' uncaughtException:', err.message);
@@ -7,6 +7,7 @@ process.on('uncaughtException', function (err) {
 
 var express = require('express');
 var path = require('path');
+var fs = require('fs');
 
 //var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -22,6 +23,12 @@ var multiClient = require('./routes/multiCallOut');
 var tierCallout_mongodb = require('./routes/mongoDB');
 var tierCallout_postgres = require('./routes/postgreSQL');
 var redis = require('./routes/redisRouter');
+var home = require('./routes/home');
+var search = require('./routes/search');
+var productPage = require('./routes/productPage');
+var addToBag = require('./routes/addToBag');
+var shippingAddress = require('./routes/shippingAddress');
+var checkOut = require('./routes/checkOut');
 
 var mongo = require('mongodb');
 var monk = require('monk');
@@ -56,6 +63,12 @@ app.use('/nsecomm/HttpCallout',multiClient);
 app.use('/nsecomm/mongodb',tierCallout_mongodb);
 app.use('/nsecomm/postgres',tierCallout_postgres);
 app.use('/nsecomm/redis',redis);
+app.use('/nsecomm/home',home);
+app.use('/nsecomm/searchProduct',search);
+app.use('/nsecomm/productPage',productPage);
+app.use('/nsecomm/addToBag',addToBag);
+app.use('/nsecomm/shippingAddress',shippingAddress);
+app.use('/nsecomm/checkOut',checkOut);
 
 
 // catch 404 and forward to error handler

@@ -21,6 +21,11 @@ function createRedisConnection (req,res)
             console.log('connected');
         });
 
+        client.on('error', function (err) {
+
+            console.log('error is- '+err);
+        });
+
 
         client.set('sahil', 'dhall'/*,function(err,rply)
          {
@@ -29,18 +34,25 @@ function createRedisConnection (req,res)
 
          console.log(rply.toString());
          }*/)
+	client.quit();
 
         client.get('sahil', function (err, rply) {
-            if (err)
-                console.log(err)
+            if (err){
+		console.log("error in redis get call : " + err);
+                console.log(err.message);
+                console.log(err.stack);
+                console.log(err.className);
+		}
 
-            console.log(rply);
+
+            console.log("reply is : " + rply);
             client.hmset(['framework', 'angular', 'bootstrap', 'express', 'node']/*, function (err,rply) {
              console.log(rply.toString())
              }*/);
-
+            //client.quit();
             client.hgetall('framework', function (err, data) {
-                console.log(data)
+                console.log("error in redis hgetall call : " + err);
+                console.log(data);
                 redisCallout(res);
             })
         });
