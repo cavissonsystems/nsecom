@@ -6,7 +6,7 @@
 var express = require ('express');
 var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
-var mongoose = require('mongoose');//mongo connection,
+//var mongoose = require('mongoose');//mongo connection,
 
 
 var http = require('http');
