@@ -6,11 +6,12 @@ var express = require('express');
 var redisRouter = express.Router();
 var redis = require('redis');
 
+// var client = redis.createClient('//redis-17593.c8.us-east-1-3.ec2.cloud.redislabs.com:17593', {no_ready_check: true});
+var client = redis.createClient('//localhost:6379', {no_ready_check: true});
 function createRedisConnection (req,res)
 {
     try {
 
-        var client = redis.createClient('//redis-17593.c8.us-east-1-3.ec2.cloud.redislabs.com:17593', {no_ready_check: true});
 
         client.auth('Sahil@123', function (err) {
             if (err)  throw err;
@@ -38,7 +39,7 @@ function createRedisConnection (req,res)
 
         client.get('sahil', function (err, rply) {
             if (err){
-		console.log("error in redis get call : " + err);
+		        console.log("error in redis get call : " + err);
                 console.log(err.message);
                 console.log(err.stack);
                 console.log(err.className);

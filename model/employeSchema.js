@@ -4,6 +4,7 @@
 
 var mongoose = require('mongoose');
 var blobSchema = new mongoose.Schema({
-    keyword:[{}]
+    name:String,
+    age:Number
 });
-mongoose.model('Blob', blobSchema);
+mongoose.model('EmployeSchema', blobSchema);

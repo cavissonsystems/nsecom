@@ -7,7 +7,8 @@ process.on('uncaughtException', function (err) {
 
 
 var mongoose = require('./model/db'),
-    blob = require('./model/blobs');
+    blob = require('./model/blobs'),
+    employeSchema = require('./model/employeSchema');
 var express = require('express');
 var path = require('path');
 

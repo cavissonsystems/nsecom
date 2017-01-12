@@ -6,7 +6,8 @@
 var express = require ('express');
 var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
-//var mongoose = require('mongoose');//mongo connection,
+
+var mongoose = require('mongoose');//mongo connection,
 
 
 var http = require('http');
@@ -14,8 +15,8 @@ var f2 = false;
 var f3 = false;
 var db;
 // Initialize connection once
-try {
-    MongoClient.connect("mongodb://sahildhall:Sahil123@ds023694.mlab.com:23694/nsecom-mongo", function (err, database) {
+/*try {
+   // MongoClient.connect("mongodb://sahildhall:Sahil123@ds023694.mlab.com:23694/nsecom-mongo", function (err, database) {
         if (err)
             return;
 
@@ -25,15 +26,15 @@ try {
 catch(err)
 {
     console.log(err)
-}
+}*/
 
 
 function makeMongoddbConnection(req, res)
 {
     try {
-            if (!db) return ;
+  //          if (!db) return ;
 
-            var collection = db.collection('cavisson');
+            /*var collection = db.collection('cavisson');
 
             //Create some users
             var user1 = {name: 'Sahil', age: 22, id: 'CS10236'};
@@ -57,8 +58,8 @@ function makeMongoddbConnection(req, res)
             }
                 //db.close();
                 mongodbCalloutResp();
-          });
-        /*mongoose.model('Blob').create({
+          });*/
+        mongoose.model('EmployeSchema').create({
             name : 'sahil',
             age : 45
         }, function (err, blob) {
@@ -67,7 +68,7 @@ function makeMongoddbConnection(req, res)
             } else {
                 //Blob has been created
                 console.log('POST creating new blob: ' + blob);
-                mongoose.model('Blob').findById(blob.id,function(err,blob)
+                mongoose.model('EmployeSchema').findById(blob.id,function(err,blob)
                 {
                     if(err)
                     {
@@ -75,7 +76,7 @@ function makeMongoddbConnection(req, res)
                     }
                     if(blob)
                     {
-                        mongoose.model('Blob').remove(blob,function(err){
+                        mongoose.model('EmployeSchema').remove(blob,function(err){
                             if(err)
                                 res.send("There was a problem adding the information to the database.");
 
@@ -85,7 +86,7 @@ function makeMongoddbConnection(req, res)
                     }
                 })
             }
-        })*/
+        })
     }
     catch(err){
         console.log("Error in connecting with mongodb : "+err);
