@@ -18,7 +18,7 @@ if(data){
     var nsecomAdd =  data.split('\n')[0];
     var address = nsecomAdd.split('|');
     host = address[1];
-    port = address[2]
+    port = address[2];
     uri = address[3]
 }
 var products = {};
@@ -28,8 +28,8 @@ function prodProcess(req,res, prodid,upc,image, price,size,quantity)
     try {
 
         var options = {
-            host : host,
-            port : port,
+            host: host,
+            port: port,
             path : '/nsecom/addToBag?size='+size+'&productid='+prodid+'&prodPrice='+price+'&upc='+upc+'&prodImage='+image+'&quantity='+quantity
         };
 

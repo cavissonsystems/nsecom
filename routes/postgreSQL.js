@@ -27,7 +27,7 @@ var config = {
 //and set a limit of maximum 10 idle clients
 var pool ;
 try {
-     pool = new pg.Pool(config);
+//     pool = new pg.Pool(config);
 }
 catch(err){}
 
@@ -40,7 +40,7 @@ for(var i=0;i<=10;i++){
         pool.connect(function (err, client,done) {
 
             if (err)
-                return ;
+                return console.log("Not connected with pgdb");
 
             //console.log("Connected successfully to pgdb ");
 
@@ -64,6 +64,9 @@ for(var i=0;i<=10;i++){
     }
 
 }
+
+console.log("Initialized pool")
+
 
 function makePostgresConnection(req, res)
 {

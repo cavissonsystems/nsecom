@@ -47,7 +47,7 @@ html
                       li
                         a(href='#')       Gift Shop      
                       li
-                        a(href='#')    Women   
+                        a(href='#')       Women
                       li
                         a(href='#')       Men      
                       li
@@ -62,7 +62,7 @@ html
              each prod in products
                 tr
                   td(align='center')
-                    a(href='productPage?productid=#{prod.prodId}&upc=#{prod.upc}&prodImage=#{prod.image}&prodPrice=#{prod.price}')
+                    a(href='/nsecomm/productPage?productid=#{prod.prodId}&upc=#{prod.upc}&prodImage=#{prod.image}&prodPrice=#{prod.price}')
                       img(src='../images/#{prod.image}', width='150', height='160')
                 tr
                   td(align='center') #{prod.description}

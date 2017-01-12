@@ -1,6 +1,7 @@
 var router = require('express').Router();
 var http = require('http');
 var redis = require('redis');
+var mongoose = require('mongoose');
 
 var path = require('path')
 var fs = require('fs')
@@ -38,23 +39,23 @@ function prodProcess(req,res, keyword, prodid, upc, image, price, description)
                 data += chunk;
             });
             resp.on('end', function () {
-		        //console.log("Getting data from java server & setting data in DB");
+		        console.log("Getting data from java server & setting data in DB");
                 client.set([keyword , data]);
-                client.expire(keyword,10);
+                client.expire(keyword,5);           //For 1 second
                 products = JSON.parse(data);
-                /*products.forEach(function(data)
-                {
-                    console.log(data)
+                res.render('search', {"products" : products});
+                /*products.forEach(function(data){
                     client.set([data.prodId , data])
                 });*/
-
-		        res.render('search', {"products" : products});
             });
         };
+        mongoose.model('Blob').create({keyword:products},function(err,blob){
+            if(err)console.log(err);
+        })
+        var httpReq = http.request(options,callback).on('error', function(err){
+            console.log(err);});
+        httpReq.end();
 
-            var req = http.request(options,callback).on('error', function(err){
-                console.log(err);});
-            req.end();
 
     }
     catch(err)
@@ -76,19 +77,51 @@ router.get('/',function(req,res,next)
         image = req.query.image;
         price = req.query.price;
         description = req.query.description;
+        var callJBOSS = false;
+         client.get(keyword, function (err, data) {
 
-        client.get(keyword, function (err, data) {
-            if (data) {
-                //console.log("Getting dAta from redis server");
-                products = JSON.parse(data);
-                res.render('search', {"products": products});
+             if (data) {
+                 console.log("Getting dAta from redis server");
+                 products = JSON.parse(data);
+                 res.render('search', {"products": products});
+             }
+             else{
+                 callJBOSS = true;
+             }
+         });
+        var args = arguments;
+        var interval = setInterval(function(){
+            if(callJBOSS) {
+                clearInterval(interval)
+                prodProcess(args[0],args[1], keyword, prodid, upc, image, price, description);
             }
-            else {
-                prodProcess(req, res, keyword, prodid, upc, image, price, description);
-            }
+
+        },1)
+        /*var pro = new Promise(function(resolve, reject) {
+            client.get(keyword, function (err, data) {
+                if (data) {
+                    console.log("Getting dAta from redis server");
+                    products = JSON.parse(data);
+                    resolve(products)
+           //         res.render('search', {"products" : products});
+                }else {
+                    reject()
+             //       prodProcess(req, res, keyword, prodid, upc, image, price, description);
+                }
+            })
         })
+        var args = arguments;
+        pro.then(function(products){
+            args[1].render('search', {"products" : products});
+        },function(res){
+            prodProcess(args[0], args[1], keyword, prodid, upc, image, price, description);
+        })*/
     }
     catch(e){console.log(e)}
 });
+
+function renderResp(req,res,product){
+    res.render('search', {"products" : product});
+}
 
 module.exports = router;

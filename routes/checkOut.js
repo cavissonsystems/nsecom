@@ -5,17 +5,28 @@
 var router = require('express').Router();
 var http = require('http');
 
+var path = require('path')
+var fs = require('fs')
+var host,
+    port;
+var propertyFile = (path.join(path.resolve(__dirname),'/../nsecom.properties'));
+var data = fs.readFileSync(propertyFile).toString();
+if(data){
+    var nsecomAdd =  data.split('\n')[0];
+    var address = nsecomAdd.split('|');
+    host = address[1];
+    port = address[2];
+    uri = address[3]
+}
 
 var products = [];
 
 function prodProcess(req,res, prodid,upc, price,size,quantity,color,status,cartId,name,address,city,PostalCode,country)
 {
-    console.log("In prodProcess");
     try {
-
         var options = {
-            host : '10.10.40.11',
-            port : '7001',
+            host : host,
+            port : port,
             path : '/nsecom/checkOut?name='+name+'&address='+address+'&city='+city+'&PostalCode='+PostalCode+'&country='+country+'&productid='+prodid+'&upc='+upc+'&size='+size+'&color='+color+'&quantity='+quantity+'&price='+price+'&status='+status+'&cartId='+cartId
         };
 
@@ -23,7 +34,6 @@ function prodProcess(req,res, prodid,upc, price,size,quantity,color,status,cartI
             var data = "";
             response.on('data', function (chunk) {
                 data += chunk;
-                console.log(data);
             });
             response.on('end', function () {
                 res.send(data);

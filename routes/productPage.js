@@ -24,8 +24,8 @@ function prodProcess(req,res, prodid,upc,image, price)
 {
     try {
         var options = {
-            host : host,
-            port : port,
+            host: host,
+            port: port,
             path : '/nsecom/productPage?productid='+prodid+'&upc='+upc+'&prodImage='+image+'&prodPrice='+price
         };
 
@@ -50,8 +50,6 @@ function prodProcess(req,res, prodid,upc,image, price)
     }
 
 };
-
-
 
 router.get('/',function(req,res,next)
 {

@@ -5,9 +5,11 @@ process.on('uncaughtException', function (err) {
   console.log(err.stack);
 });
 
+
+var mongoose = require('./model/db'),
+    blob = require('./model/blobs');
 var express = require('express');
 var path = require('path');
-var fs = require('fs');
 
 //var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -32,7 +34,6 @@ var checkOut = require('./routes/checkOut');
 
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('localhost:27017/untitled1');
 var app = express();
 
 // view engine setup
@@ -49,7 +50,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Make our db accessible to our router
 app.use(function(req,res,next){
-    req.db = db;
+    //req.db = db;
     next();
 });
 
