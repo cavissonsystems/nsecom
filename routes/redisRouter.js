@@ -35,15 +35,14 @@ function createRedisConnection (req,res)
 
          console.log(rply.toString());
          }*/)
-	client.quit();
+	    //client.quit();
 
         client.get('sahil', function (err, rply) {
             if (err){
 		        console.log("error in redis get call : " + err);
                 console.log(err.message);
                 console.log(err.stack);
-                console.log(err.className);
-		}
+                console.log(err.className);}
 
 
             console.log("reply is : " + rply);

@@ -60,12 +60,12 @@ for(var i=0;i<=10;i++){
     }
     catch(err)
     {
-        console.log("Error in connecting with PG: "+err)
+       // console.log("Error in connecting with PG: "+err)
     }
 
 }
 
-console.log("Initialized pool")
+//console.log("Initialized pool")
 
 
 function makePostgresConnection(req, res)
