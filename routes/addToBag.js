@@ -22,7 +22,7 @@ if(data){
     uri = address[3]
 }
 var products = {};
-
+var passport = require('passport');
 function prodProcess(req,res, prodid,upc,image, price,size,quantity)
 {
     try {
@@ -59,6 +59,8 @@ function prodProcess(req,res, prodid,upc,image, price,size,quantity)
 
 router.get('/',function(req,res,next)
 {
+    if(!req.session.userName)
+        return res.redirect('/login')
     var prodid, upc, image, price, size, quantity;
     prodid = req.query.productid;
     upc = req.query.upc;

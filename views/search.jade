@@ -27,6 +27,13 @@ html
     form(name='frmMain1', method='get', action='searchProduct')
       table(border='0', width='100%')
         tr
+          td(align='right')
+            input#srch(type='button', onclick='openUrl()', value='Login')
+            | Welcome #{uname}
+        tr
+          td(width='90%', align='right')
+            input#lgt(type='button', onclick='logout()', value='LogOut')
+        tr
           td
             table(border='0', width='60%', align='center')
               tr
@@ -68,4 +75,13 @@ html
                   td(align='center') #{prod.description}
                 tr
                   td(align='center')  US $#{prod.price}
-
+        script.
+          function openUrl() {
+            var id = "/login"
+            window.open(id,"_self");
+          }
+        script.
+          function logout() {
+            var id = "/logout"
+            window.open(id,"_self");
+          }

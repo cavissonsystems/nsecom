@@ -5,19 +5,33 @@ process.on('uncaughtException', function (err) {
   console.log(err.stack);
 });
 
-
 var mongoose = require('./model/db'),
     blob = require('./model/blobs'),
-    employeSchema = require('./model/employeSchema');
-var express = require('express');
-var path = require('path');
+    employeSchema = require('./model/employeSchema'),
+    user = require('./model/user');
 
+var express = require('express');
+var app = express();
+var path = require('path');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
+var session      = require('express-session');
 //var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var bCrypt = require('bcrypt-nodejs')
+app.use(session({ secret: 'nodejs'}));
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
 
-var routes = require('./routes/index');
+passport.use(new LocalStrategy(user.authenticate()));
+passport.serializeUser(user.serializeUser());
+passport.deserializeUser(user.deserializeUser());
+
+
+var bodyParser = require('body-parser');
+//var routes = require('./routes/index');
 var users = require('./routes/users');
 var nsecomm = require('./routes/nsecomm');
 var checkOutOrder = require('./routes/checkOutAndPlaceOrder');
@@ -32,13 +46,10 @@ var productPage = require('./routes/productPage');
 var addToBag = require('./routes/addToBag');
 var shippingAddress = require('./routes/shippingAddress');
 var checkOut = require('./routes/checkOut');
+var routes = require('./routes/authenticate.js')
 
-var mongo = require('mongodb');
-var monk = require('monk');
-var app = express();
-
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
+// view engine setup
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
@@ -71,6 +82,9 @@ app.use('/nsecomm/productPage',productPage);
 app.use('/nsecomm/addToBag',addToBag);
 app.use('/nsecomm/shippingAddress',shippingAddress);
 app.use('/nsecomm/checkOut',checkOut);
+app.use('/nsecomm/user',user);
+
+//app.use('/nsecomm/authenticate',authenticate);
 
 
 // catch 404 and forward to error handler

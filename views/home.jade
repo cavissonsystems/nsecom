@@ -26,6 +26,13 @@ html
   body(bgcolor='#E6E6FA', leftmargin='0', topmargin='0', marginwidth='0', marginheight='0')
     table(border='0', width='100%')
       tr
+          td(width='90%', align='right')
+              input#login(type='button', onclick='openLogin()', value='Login')
+              | Welcome #{uname}
+      tr
+          td(width='90%', align='right')
+              input#logout(type='button', onclick='logout()', value='LogOut')
+      tr
         td
           table(border='0', width='60%', align='center')
             tr
@@ -61,3 +68,13 @@ html
         var id = "/nsecomm/searchProduct?keyword=" +document.getElementById("keyword").value;
         window.open(id,"_self");
       }
+    script.
+      function openLogin() {
+        var id = "/login"
+        window.open(id,"_self");
+      }
+    script.
+      function logout() {
+        var id = "/logout"
+          window.open(id,"_self");
+        }

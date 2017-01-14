@@ -24,7 +24,7 @@ try {
 
 var products = {};
 
-function prodProcess(req,res, keyword, prodid, upc, image, price, description)
+function prodProcess(req,res, keyword, prodid, upc, image, price, description,UserName)
 {
     try {
         var options = {
@@ -43,7 +43,7 @@ function prodProcess(req,res, keyword, prodid, upc, image, price, description)
                 client.set([keyword , data]);
                 client.expire(keyword,5);           //For 1 second
                 products = JSON.parse(data);
-                res.render('search', {"products" : products});
+                res.render('search', {"products" : products,"uname":UserName});
                 /*products.forEach(function(data){
                     client.set([data.prodId , data])
                 });*/
@@ -71,6 +71,7 @@ router.get('/',function(req,res,next)
 {
     try {
         var keyword, prodid, upc, image, price, description;
+        var UserName = "Guest User"
         keyword = req.query.keyword;
         prodid = req.query.prodid;
         upc = req.query.upc;
@@ -78,12 +79,14 @@ router.get('/',function(req,res,next)
         price = req.query.price;
         description = req.query.description;
         var callJBOSS = false;
+        if(req.session.userName)
+            UserName = req.session.userName.username;
          client.get(keyword, function (err, data) {
 
              if (data) {
                  console.log("Getting dAta from redis server");
                  products = JSON.parse(data);
-                 res.render('search', {"products": products});
+                 res.render('search', {"products": products,"uname":UserName});
              }
              else{
                  callJBOSS = true;
@@ -93,7 +96,7 @@ router.get('/',function(req,res,next)
         var interval = setInterval(function(){
             if(callJBOSS) {
                 clearInterval(interval)
-                prodProcess(args[0],args[1], keyword, prodid, upc, image, price, description);
+                prodProcess(args[0],args[1], keyword, prodid, upc, image, price, description,UserName);
             }
 
         },1)
