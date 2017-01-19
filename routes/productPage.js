@@ -16,7 +16,6 @@ if(data){
         host = address[1];
         port = address[2]
         uri = address[3]
-
 }
 var products = {};
 

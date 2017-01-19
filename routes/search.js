@@ -39,19 +39,24 @@ function prodProcess(req,res, keyword, prodid, upc, image, price, description,Us
                 data += chunk;
             });
             resp.on('end', function () {
-		        console.log("Getting data from java server & setting data in DB");
-                client.set([keyword , data]);
-                client.expire(keyword,5);           //For 1 second
-                products = JSON.parse(data);
-                res.render('search', {"products" : products,"uname":UserName});
-                /*products.forEach(function(data){
-                    client.set([data.prodId , data])
-                });*/
+                try {
+                    console.log("Getting data from java server & setting data in DB");
+                    client.set([keyword, data]);
+                    client.expire(keyword, 5);           //For 1 second
+                    if(data.trim()==="")
+                        data="{}";
+                    products = JSON.parse(data);
+                    res.render('search', {"products": products, "uname": UserName});
+                    /*products.forEach(function(data){
+                     client.set([data.prodId , data])
+                     });*/
+                }
+                catch(err){console.log(err)}
             });
         };
         mongoose.model('Blob').create({keyword:products},function(err,blob){
             if(err)console.log(err);
-        })
+        });
         var httpReq = http.request(options,callback).on('error', function(err){
             console.log(err);});
         httpReq.end();

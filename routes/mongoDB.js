@@ -67,7 +67,7 @@ function makeMongoddbConnection(req, res)
                 res.send("There was a problem adding the information to the database.");
             } else {
                 //Blob has been created
-                console.log('POST creating new blob: ' + blob);
+                //console.log('POST creating new blob: ' + blob);
                 mongoose.model('EmployeSchema').findById(blob.id,function(err,blob)
                 {
                     if(err)
@@ -80,7 +80,7 @@ function makeMongoddbConnection(req, res)
                             if(err)
                                 res.send("There was a problem adding the information to the database.");
 
-                            console.log("deleted successfully : ",blob)
+                  //          console.log("deleted successfully : ",blob)
                             mongodbCalloutResp();
                         })
                     }

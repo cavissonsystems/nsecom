@@ -21,13 +21,13 @@ if(data){
 
 var products = [];
 
-function prodProcess(req,res, prodid,upc, price,size,quantity,color,status,cartId,name,address,city,PostalCode,country)
+function prodProcess(req,res, prodid,upc, price,size,quantity,color,status,cartId,name,address,city,PostalCode,country,card,cvv,month,year)
 {
     try {
         var options = {
             host : host,
             port : port,
-            path : '/nsecom/checkOut?name='+name+'&address='+address+'&city='+city+'&PostalCode='+PostalCode+'&country='+country+'&productid='+prodid+'&upc='+upc+'&size='+size+'&color='+color+'&quantity='+quantity+'&price='+price+'&status='+status+'&cartId='+cartId
+            path : '/nsecom/checkOut?name='+name+'&address='+address+'&city='+city+'&PostalCode='+PostalCode+'&country='+country+'&card='+card+'&cvv='+cvv+'&month='+month+'&Year='+year+'&productid='+prodid+'&upc='+upc+'&size='+size+'&color='+color+'&quantity='+quantity+'&price='+price+'&status='+status+'&cartId='+cartId
         };
 
         var callback = function (response) {
@@ -56,7 +56,7 @@ function prodProcess(req,res, prodid,upc, price,size,quantity,color,status,cartI
 
 router.get('/',function(req,res,next)
 {
-    var name,address,city,PostalCode,country,prodid, upc, price, size, quantity,color,status,cartId;
+    var name,address,city,PostalCode,country,prodid, upc, price, size, quantity,color,status,cartId,card,cvv,month,year;
     name = req.query.name;
     address = req.query.address;
     city = req.query.city;
@@ -70,7 +70,12 @@ router.get('/',function(req,res,next)
     color = req.query.color;
     status = req.query.status;
     cartId = req.query.cartId;
-    prodProcess(req,res, prodid,upc, price, size, quantity,color,status,cartId, name,address,city,PostalCode,country);
+    card = req.query.card;
+    cvv = req.query.cvv;
+    month = req.query.month;
+    year = req.query.Year;
+    //card=s&cvv=s&month=02&Year=2016
+    prodProcess(req,res, prodid,upc, price, size, quantity,color,status,cartId, name,address,city,PostalCode,country,card,cvv,month,year);
     /*setTimeout(function(){
      res.render('search', {"products" : products});},5000);*/
 });

@@ -7,7 +7,10 @@ var redisRouter = express.Router();
 var redis = require('redis');
 
 // var client = redis.createClient('//redis-17593.c8.us-east-1-3.ec2.cloud.redislabs.com:17593', {no_ready_check: true});
-var client = redis.createClient('//localhost:6379', {no_ready_check: true});
+try {
+    var client = redis.createClient('//localhost:6379', {no_ready_check: true});
+}
+catch(err){console.log(err)}
 function createRedisConnection (req,res)
 {
     try {
@@ -28,13 +31,13 @@ function createRedisConnection (req,res)
         });
 
 
-        client.set('sahil', 'dhall'/*,function(err,rply)
+        client.set('sahil', 'dhall')/*,function(err,rply)
          {
          if(err)
          console.log(err)
 
          console.log(rply.toString());
-         }*/)
+         })*/
 	    //client.quit();
 
         client.get('sahil', function (err, rply) {
