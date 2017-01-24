@@ -19,7 +19,7 @@ if(data){
 }
 var products = {};
 
-function prodProcess(req,res, prodid,upc,image, price)
+function productInfo(req,res, prodid,upc,image, price)
 {
     try {
         var options = {
@@ -49,6 +49,11 @@ function prodProcess(req,res, prodid,upc,image, price)
     }
 
 };
+function productData() {
+    console.log("productData has called");
+    setTimeout(function() {
+    }, 2000);
+}
 
 router.get('/',function(req,res,next)
 {
@@ -57,7 +62,8 @@ router.get('/',function(req,res,next)
     upc = req.query.upc;
     image = req.query.prodImage;
     price = req.query.prodPrice;
-    prodProcess(req,res, prodid,upc, image, price)
+    productData();
+    productInfo(req,res, prodid,upc, image, price)
 });
 
 module.exports = router;

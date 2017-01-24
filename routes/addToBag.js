@@ -23,7 +23,7 @@ if(data){
 }
 var products = {};
 var passport = require('passport');
-function prodProcess(req,res, prodid,upc,image, price,size,quantity)
+function addToCart(req,res, prodid,upc,image, price,size,quantity)
 {
     try {
 
@@ -39,7 +39,10 @@ function prodProcess(req,res, prodid,upc,image, price,size,quantity)
                 data += chunk;
             });
             response.on('end', function () {
-                res.send(data);
+                try{
+                    res.send(data);
+                }
+                catch(e){console.log(e)}
             });
         };
 
@@ -59,18 +62,27 @@ function prodProcess(req,res, prodid,upc,image, price,size,quantity)
 
 router.get('/',function(req,res,next)
 {
-    if(!req.session.userName)
-        return res.redirect('/login')
-    var prodid, upc, image, price, size, quantity;
-    prodid = req.query.productid;
-    upc = req.query.upc;
-    image = req.query.prodImage;
-    price = req.query.price;
-    size = req.query.size;
-    quantity = req.query.quantity;
-    prodProcess(req,res, prodid,upc, image, price, size, quantity);
-    /*setTimeout(function(){
-     res.render('search', {"products" : products});},5000);*/
+    try {
+        if (!req.session.userName)
+            return res.redirect('/login');
+        var prodid, upc, image, price, size, quantity;
+        prodid = req.query.productid;
+        upc = req.query.upc;
+        image = req.query.prodImage;
+        price = req.query.price;
+        size = req.query.size;
+        quantity = req.query.quantity;
+        availabilityCheck();
+        addToCart(req, res, prodid, upc, image, price, size, quantity);
+        /*setTimeout(function(){
+         res.render('search', {"products" : products});},5000);*/
+    }
+    catch(e){console.log(e)}
 });
+
+function availabilityCheck(){
+    setTimeout(function() {
+    }, 10000);
+}
 
 module.exports = router;

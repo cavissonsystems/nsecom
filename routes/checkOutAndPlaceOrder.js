@@ -1,19 +1,17 @@
 /**
  * Created by bala on 3/7/15.
  */
-var express = require('express');
+var router = require('express').Router();;
 var calculateAmount = require('../CalculateAmount');
 var placeOrder = require('../PlaceOrder');
 var updateCheckOut = require('../UpdateCheckOut');
-var router = express.Router();
 var checkExecutionTimeForMethods = require('../CheckExecutionTimeForMethods');
 var http = require('http');
-
 
 function availabilityCheck(req, res) {
     console.log("availabilityCheck has called");
 try{
-   x();
+ //  x();
 }catch(err){
 console.log("custom error has called");
 }
@@ -34,12 +32,21 @@ function checkStoreInventory(){
 
 
 function productInfo() {
+    for(i in 100000000000000000000000000000000000000000000000000){}
+    var milliseconds = 3500;
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+        if ((new Date().getTime() - start) > milliseconds){
+            break;
+        }
+    }
     console.log("productInfo has called");
     setTimeout(function() {
     }, 2000);
 }
 function checkout(req, res, sleepTime, sleepTimeForValidate, level, isManyMethodsCall) {
     try {
+
         setTimeout(function () {
         }, 13000);
         // log.info("checkOut() sleep time for cc =" + sleepTimeForCC + "sleep time for validate = " + sleepTimeForValidate + " level = " + level);
@@ -224,7 +231,6 @@ function dbOperation(operation, productID, productName, column, uvalue, wcolumn,
 }
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-
     var operation, stfcc, stfv, productID, productName, column, uvalue, wcolumn, wvalue, query, logSeverity, logMessage, isManyMethodsCall;
     var db = req.db;
     var sleepTime = req.query.sleepTimeForCC;

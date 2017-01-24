@@ -20,7 +20,7 @@ if(data){
 
 var products = [];
 
-function prodProcess(req,res, prodid,upc,image, price,size,quantity,color,status,cartId)
+function userAddress(req,res, prodid,upc,image, price,size,quantity,color,status,cartId)
 {
     try {
 
@@ -66,7 +66,7 @@ router.get('/',function(req,res,next)
     color = req.query.color;
     status = req.query.status;
     cartId = req.query.cartId;
-    prodProcess(req,res, prodid,upc, image, price, size, quantity,color,status,cartId);
+    userAddress(req,res, prodid,upc, image, price, size, quantity,color,status,cartId);
     /*setTimeout(function(){
      res.render('search', {"products" : products});},5000);*/
 });

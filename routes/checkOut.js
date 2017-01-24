@@ -10,6 +10,9 @@ var fs = require('fs')
 var host,
     port;
 var propertyFile = (path.join(path.resolve(__dirname),'/../nsecom.properties'));
+var calculateAmount = require('../CalculateAmount');
+var placeOrder = require('../PlaceOrder');
+var updateCheckOut = require('../UpdateCheckOut');
 var data = fs.readFileSync(propertyFile).toString();
 if(data){
     var nsecomAdd =  data.split('\n')[0];
@@ -21,7 +24,7 @@ if(data){
 
 var products = [];
 
-function prodProcess(req,res, prodid,upc, price,size,quantity,color,status,cartId,name,address,city,PostalCode,country,card,cvv,month,year)
+function checkOut(req,res, prodid,upc, price,size,quantity,color,status,cartId,name,address,city,PostalCode,country,card,cvv,month,year)
 {
     try {
         var options = {
@@ -75,7 +78,11 @@ router.get('/',function(req,res,next)
     month = req.query.month;
     year = req.query.Year;
     //card=s&cvv=s&month=02&Year=2016
-    prodProcess(req,res, prodid,upc, price, size, quantity,color,status,cartId, name,address,city,PostalCode,country,card,cvv,month,year);
+    calculateAmount.calculateAmt();
+    calculateAmount.chargeCreditCard(5, 40);
+    placeOrder.fullfillOrder();
+    updateCheckOut.updateCheckOutStats();
+    checkOut(req,res, prodid,upc, price, size, quantity,color,status,cartId, name,address,city,PostalCode,country,card,cvv,month,year);
     /*setTimeout(function(){
      res.render('search', {"products" : products});},5000);*/
 });

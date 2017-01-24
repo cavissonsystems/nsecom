@@ -46,9 +46,9 @@ var productPage = require('./routes/productPage');
 var addToBag = require('./routes/addToBag');
 var shippingAddress = require('./routes/shippingAddress');
 var checkOut = require('./routes/checkOut');
-var routes = require('./routes/authenticate.js')
-var memoryLeak = require('./routes/memoryLeak')
-var cpuUtilization = require('./routes/cpuUtilization')
+var routes = require('./routes/authenticate.js');
+var checkInventory = require('./routes/checkInventory');
+var executeBatchJob = require('./routes/executeBatchJob');
 
 app.set('views', path.join(__dirname, 'views'));
 // view engine setup
@@ -85,8 +85,8 @@ app.use('/nsecomm/addToBag',addToBag);
 app.use('/nsecomm/shippingAddress',shippingAddress);
 app.use('/nsecomm/checkOut',checkOut);
 app.use('/nsecomm/user',user);
-app.use('/nsecomm/memoryLeak',memoryLeak);
-app.use('/nsecomm/cpuUtilization',cpuUtilization);
+app.use('/nsecomm/checkInventory',checkInventory);
+app.use('/nsecomm/executeBatchJob',executeBatchJob);
 
 //app.use('/nsecomm/authenticate',authenticate);
 

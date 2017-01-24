@@ -16,9 +16,9 @@ function createRedisConnection (req,res)
     try {
 
 
-        client.auth('Sahil@123', function (err) {
+       /* client.auth('Sahil@123', function (err) {
             if (err)  throw err;
-        });
+        });*/
 
         client.on('connect', function (err) {
             if (err) throw  err;
@@ -54,8 +54,6 @@ function createRedisConnection (req,res)
              }*/);
             //client.quit();
             client.hgetall('framework', function (err, data) {
-                console.log("error in redis hgetall call : " + err);
-                console.log(data);
                 redisCallout(res);
             })
         });

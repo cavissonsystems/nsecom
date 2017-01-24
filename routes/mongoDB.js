@@ -102,7 +102,6 @@ function makeMongoddbConnection(req, res)
 /* GET home page. */
 router.get('/', function(req, res, next)
 {
-
     makeMongoddbConnection(req, res);
 });
 

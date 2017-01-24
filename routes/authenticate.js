@@ -15,15 +15,18 @@ router.get('/signup', function(req, res){
 });
 
 router.post('/signup', function(req, res) {
-    Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
-        if (err) {
-            return res.render('signup', { account : account });
-        }
+    try {
+        Account.register(new Account({username: req.body.username}), req.body.password, function (err, account) {
+            if (err) {
+                return res.render('signup', {account: account});
+            }
 
-        passport.authenticate('local')(req, res, function () {
-            res.redirect('/login');
+            passport.authenticate('local')(req, res, function () {
+                res.redirect('/login');
+            });
         });
-    });
+    }
+    catch(e){console.log(e)}
 });
 
 router.get('/login', function(req, res){
@@ -37,16 +40,32 @@ router.get('/logout', function(req, res) {
 
 
 router.post('/login', function(req, res) {
-    passport.authenticate('local', function(err, user, info) {
-         if (err) { return next(err); }
-         // Redirect if it fails
-         if (!user) { return res.redirect('/login'); }
+    function validateUserInfo() {
+        try {
+            var milliseconds = 3500;
+            var start = new Date().getTime();
+            for (var i = 0; i < 1e7; i++) {
+                if ((new Date().getTime() - start) > milliseconds){
+                    break;
+                }
+            }
+            passport.authenticate('local', function (err, user, info) {
+                if (err) {
+                    return next(err);
+                }
+                // Redirect if it fails
+                if (!user) {
+                    return res.redirect('/login');
+                }
 
-        req.session.userName=user;
-        return res.redirect('/nsecomm/home');
-         //res.redirect('/nsecomm/home');
-     })
-    (req, res);
+                req.session.userName = user;
+                return res.redirect('/nsecomm/home');
+                //res.redirect('/nsecomm/home');
+            })
+            (req, res);
+        }catch(e){console.log(e)}
+    }
+    validateUserInfo();
 });
 
 

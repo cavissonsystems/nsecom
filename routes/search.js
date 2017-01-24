@@ -24,7 +24,7 @@ try {
 
 var products = {};
 
-function prodProcess(req,res, keyword, prodid, upc, image, price, description,UserName)
+function searchProduct(req,res, keyword, prodid, upc, image, price, description,UserName)
 {
     try {
         var options = {
@@ -51,7 +51,10 @@ function prodProcess(req,res, keyword, prodid, upc, image, price, description,Us
                      client.set([data.prodId , data])
                      });*/
                 }
-                catch(err){console.log(err)}
+                catch(err){
+                    console.log(err)
+                    return res.redirect('/nsecomm/home');
+                    }
             });
         };
         mongoose.model('Blob').create({keyword:products},function(err,blob){
@@ -75,58 +78,45 @@ function prodProcess(req,res, keyword, prodid, upc, image, price, description,Us
 router.get('/',function(req,res,next)
 {
     try {
-        var keyword, prodid, upc, image, price, description;
-        var UserName = "Guest User"
-        keyword = req.query.keyword;
-        prodid = req.query.prodid;
-        upc = req.query.upc;
-        image = req.query.image;
-        price = req.query.price;
-        description = req.query.description;
-        var callJBOSS = false;
-        if(req.session.userName)
-            UserName = req.session.userName.username;
-         client.get(keyword, function (err, data) {
-
-             if (data) {
-                 console.log("Getting dAta from redis server");
-                 products = JSON.parse(data);
-                 res.render('search', {"products": products,"uname":UserName});
-             }
-             else{
-                 callJBOSS = true;
-             }
-         });
-        var args = arguments;
-        var interval = setInterval(function(){
-            if(callJBOSS) {
-                clearInterval(interval)
-                prodProcess(args[0],args[1], keyword, prodid, upc, image, price, description,UserName);
-            }
-
-        },1)
-        /*var pro = new Promise(function(resolve, reject) {
-            client.get(keyword, function (err, data) {
-                if (data) {
-                    console.log("Getting dAta from redis server");
-                    products = JSON.parse(data);
-                    resolve(products)
-           //         res.render('search', {"products" : products});
-                }else {
-                    reject()
-             //       prodProcess(req, res, keyword, prodid, upc, image, price, description);
-                }
-            })
-        })
-        var args = arguments;
-        pro.then(function(products){
-            args[1].render('search', {"products" : products});
-        },function(res){
-            prodProcess(args[0], args[1], keyword, prodid, upc, image, price, description);
-        })*/
+        searchProductInRedis(req,res);
     }
     catch(e){console.log(e)}
 });
+
+function searchProductInRedis(req,res){
+    var keyword, prodid, upc, image, price, description;
+    var UserName = "Guest User"
+    keyword = req.query.keyword;
+    prodid = req.query.prodid;
+    upc = req.query.upc;
+    image = req.query.image;
+    price = req.query.price;
+    description = req.query.description;
+    var callJBOSS = false;
+    if(req.session.userName)
+        UserName = req.session.userName.username;
+    client.get(keyword, function (err, data){
+        try {
+            if (data) {
+                console.log("Getting dAta from redis server");
+                products = JSON.parse(data);
+                res.render('search', {"products": products, "uname": UserName});
+            }
+            else {
+                callJBOSS = true;
+            }
+        }
+        catch(e){console.log(e)}
+    });
+    var args = arguments;
+    var interval = setInterval(function(){
+        if(callJBOSS) {
+            clearInterval(interval)
+            searchProduct(args[0],args[1], keyword, prodid, upc, image, price, description,UserName);
+        }
+
+    },1)
+}
 
 function renderResp(req,res,product){
     res.render('search', {"products" : product});
