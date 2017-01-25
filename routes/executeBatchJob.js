@@ -22,7 +22,7 @@ function posBatchtJob(){
     setTimeout(function() {
     }, 2000);
 }
-function verifyBatchJob(){
+function verifyBatchJob(req,res){
     var start = new Date().getTime();
     for (var i = 0; i < 900000; i++) {
         fs.readFileSync(fileName).toString();

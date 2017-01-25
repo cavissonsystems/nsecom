@@ -5,10 +5,13 @@ process.on('uncaughtException', function (err) {
   console.log(err.stack);
 });
 
-var mongoose = require('./model/db'),
-    blob = require('./model/blobs'),
-    employeSchema = require('./model/employeSchema'),
-    user = require('./model/user');
+try {
+  var mongoose = require('./model/db'),
+      blob = require('./model/blobs'),
+      employeSchema = require('./model/employeSchema'),
+      user = require('./model/user');
+}
+catch(e){console.log(e)}
 
 var express = require('express');
 var app = express();

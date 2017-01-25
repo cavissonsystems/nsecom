@@ -40,7 +40,8 @@ router.get('/logout', function(req, res) {
 
 
 router.post('/login', function(req, res) {
-    function validateUserInfo() {
+    function validateUserInfo()
+        {
         try {
             var milliseconds = 3500;
             var start = new Date().getTime();
@@ -50,17 +51,20 @@ router.post('/login', function(req, res) {
                 }
             }
             passport.authenticate('local', function (err, user, info) {
-                if (err) {
-                    return next(err);
-                }
-                // Redirect if it fails
-                if (!user) {
-                    return res.redirect('/login');
-                }
+                try {
+                    if (err) {
+                        return next(err);
+                    }
+                    // Redirect if it fails
+                    if (!user) {
+                        return res.redirect('/login');
+                    }
 
-                req.session.userName = user;
-                return res.redirect('/nsecomm/home');
-                //res.redirect('/nsecomm/home');
+                    req.session.userName = user;
+                    return res.redirect('/nsecomm/home');
+                    //res.redirect('/nsecomm/home');
+                }
+                catch(e){console.log(e)}
             })
             (req, res);
         }catch(e){console.log(e)}
