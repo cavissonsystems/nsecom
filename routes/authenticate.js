@@ -43,13 +43,14 @@ router.post('/login', function(req, res) {
     function validateUserInfo()
         {
         try {
-            var milliseconds = 3500;
+
+/*            var milliseconds = 3500;
             var start = new Date().getTime();
             for (var i = 0; i < 1e7; i++) {
                 if ((new Date().getTime() - start) > milliseconds){
                     break;
                 }
-            }
+            }*/
             passport.authenticate('local', function (err, user, info) {
                 try {
                     if (err) {
