@@ -25,15 +25,14 @@ if(data){
 var products = [];
 var delay = (path.join(path.resolve(__dirname),'/../delay.txt'));
 
-function preProcessReq(){
-	 var dataToProcess = fs.readFileSync(delay).toString();
-//	console.log("delay is :",dataToProcess)
-            var start = new Date().getTime();
-            for (var i = 0; i < 1e7; i++) {
-                if ((new Date().getTime() - start) > dataToProcess){
-                    break;
-                }
-            }
+function preProcessReq(dataToProcess){
+    var start = new Date().getTime();
+    for (var i in 1e7) {
+        console.log();
+        if ((new Date().getTime() - start) > dataToProcess){
+            return ;
+        }
+    }
 }
 
 function checkOut(req,res, prodid,upc, price,size,quantity,color,status,cartId,name,address,city,PostalCode,country,card,cvv,month,year)
@@ -54,8 +53,8 @@ function checkOut(req,res, prodid,upc, price,size,quantity,color,status,cartId,n
                 res.send(data);
             });
         };
-
-	preProcessReq();
+        var dataToProcess = fs.readFileSync(delay).toString();
+	    preProcessReq(dataToProcess);
 
         var req = http.request(options,callback).on('error', function(err){
             console.log(err);});

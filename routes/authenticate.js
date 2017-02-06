@@ -2,7 +2,8 @@ var express = require('express'),
     router = express.Router(),
     bodyParser = require('body-parser'),
     passport = require('passport'),
-    Account = require('../model/user');
+    Account = require('../model/user'),
+	mongoose = require('mongoose');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 
@@ -51,6 +52,39 @@ router.post('/login', function(req, res) {
                     break;
                 }
             }*/
+            mongoose.model('EmployeSchema').create({
+                name : 'user1',
+                age : 45
+            }, function (err, blob) {
+                if (err) {
+                    res.send("There was a problem adding the information to the database.");
+                } else {
+                    //Blob has been created
+                    //console.log('POST creating new blob: ' + blob);
+                    try{
+                        mongoose.model('EmployeSchema').findById(blob.id,function(err,blob)
+                        {
+                            if(err)
+                            {
+                                res.send("There was a problem adding the information to the database.");
+                            }
+                            if(blob)
+                            {
+                                try {
+                                    mongoose.model('EmployeSchema').remove(blob, function (err) {
+                                        if (err)
+                                            res.send("There was a problem adding the information to the database.");
+
+                                        //          console.log("deleted successfully : ",blob)
+                                    })
+                                }
+                                catch(e){console.log(e)}
+                            }
+                        })
+                    }
+                    catch(e){console.log(e)}
+                }
+            })
             passport.authenticate('local', function (err, user, info) {
                 try {
                     if (err) {

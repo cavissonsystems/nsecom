@@ -108,6 +108,7 @@ function searchProductInRedis(req,res){
         }
         catch(e){console.log(e)}
     });
+    
     var args = arguments;
     var interval = setInterval(function(){
         if(callJBOSS) {
