@@ -28,10 +28,11 @@ var delay = (path.join(path.resolve(__dirname),'/../delay.txt'));
 function preProcessReq(dataToProcess){
     var start = new Date().getTime();
     for (var i in 1e7) {
-        console.log();
         if ((new Date().getTime() - start) > dataToProcess){
             return ;
         }
+        else
+            continue;
     }
 }
 

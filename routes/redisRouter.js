@@ -43,10 +43,6 @@ function createRedisConnection (req,res)
         client.get('sahil', function (err, rply) {
             if (err){
 		        console.log("error in redis get call : " + err);
-                console.log(err.message);
-                console.log(err.stack);
-                console.log(err.className);}
-
 
             console.log("reply is : " + rply);
             client.hmset(['framework', 'angular', 'bootstrap', 'express', 'node']/*, function (err,rply) {

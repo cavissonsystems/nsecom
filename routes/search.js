@@ -46,6 +46,11 @@ function searchProduct(req,res, keyword, prodid, upc, image, price, description,
                     if(data.trim()==="")
                         data="{}";
                     products = JSON.parse(data);
+		    /*
+			for(var i in products){
+	                         var prodDetail = new productDetails(products[i].prodId,products[i].upc,products[i].name,products[i].image,products[i].price,products[i].description,products[i].quantity)
+                        listOfItems.push(prodDetail)
+                    }	*/
                     res.render('search', {"products": products, "uname": UserName});
                     /*products.forEach(function(data){
                      client.set([data.prodId , data])
@@ -100,15 +105,24 @@ function searchProductInRedis(req,res){
             if (data) {
                 console.log("Getting dAta from redis server");
                 products = JSON.parse(data);
+		 /*for(var i in products){
+			var prodDetail = new productDetails(products[i].prodId,products[i].upc,products[i].name,products[i].image,products[i].price,products[i].description,products[i].quantity)
+                        listOfItems.push(prodDetail)
+                	for(p=0;p<300;p++){
+                		var prodDetail = new productDetails(products[i].prodId,products[i].upc,products[i].name,products[i].image,products[i].price,products[i].description,products[i].quantity)
+                        	listOfItems.push(prodDetail)
+                	}
+             	}*/
                 res.render('search', {"products": products, "uname": UserName});
             }
             else {
-                callJBOSS = true;
+		searchProduct(req,res, keyword, prodid, upc, image, price, description,UserName);
+                //callJBOSS = true;
             }
         }
         catch(e){console.log(e)}
     });
-    
+    /*
     var args = arguments;
     var interval = setInterval(function(){
         if(callJBOSS) {
@@ -116,7 +130,7 @@ function searchProductInRedis(req,res){
             searchProduct(args[0],args[1], keyword, prodid, upc, image, price, description,UserName);
         }
 
-    },1)
+    },1)*/
 }
 
 function renderResp(req,res,product){

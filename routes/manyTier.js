@@ -13,6 +13,10 @@ var f1 = false;
 var f2 = false;
 //var f3 = false;
 
+function x(){
+    throw new Error("Custom Error");
+}
+
 function multiHttpConnection(req, res) {
     try {
         var options = {
@@ -66,7 +70,7 @@ function multiHttpConnection(req, res) {
 	/*http.request(options);
 	sendResp();*/
 	//http.request(options1);
-
+ //       x();
         http.request(options, callback).on('error',function(err){console.log(err)}).end();
         sendResp();
         //http.request(options1, callback1).on('error', function (err) {
@@ -78,6 +82,7 @@ function multiHttpConnection(req, res) {
     catch(err)
     {
         console.log("error in making http calls : "+err)
+        sendResp();
     }
 
 

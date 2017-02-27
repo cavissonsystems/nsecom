@@ -1,0 +1,13 @@
+[{
+
+  "modulename":"**/*.js",
+  "instrument":true
+},{
+  "modulename":"http",
+
+  "instrument":true
+},{
+  "modulename":"**/node_modules/redis/**",
+
+  "instrument":true
+}]
