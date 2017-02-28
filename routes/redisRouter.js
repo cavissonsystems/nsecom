@@ -41,17 +41,17 @@ function createRedisConnection (req,res)
 	    //client.quit();
 
         client.get('sahil', function (err, rply) {
-            if (err){
-		        console.log("error in redis get call : " + err);
+            if (err)
+                console.log("error in redis get call : " + err);
 
-            console.log("reply is : " + rply);
-            client.hmset(['framework', 'angular', 'bootstrap', 'express', 'node']/*, function (err,rply) {
-             console.log(rply.toString())
-             }*/);
-            //client.quit();
-            client.hgetall('framework', function (err, data) {
-                redisCallout(res);
-            })
+                console.log("reply is : " + rply);
+                client.hmset(['framework', 'angular', 'bootstrap', 'express', 'node']/*, function (err,rply) {
+                 console.log(rply.toString())
+                 }*/);
+                //client.quit();
+                client.hgetall('framework', function (err, data) {
+                    redisCallout(res);
+                })
         });
     }
     catch(err)
