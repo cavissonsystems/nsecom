@@ -147,7 +147,7 @@ function makePostgresConnection(req, res)
             console.log("Connected successfully to pgdb ");
 
             client.query('CREATE TABLE cavisson(id int,name varchar(40))')
-            client.query('INSERT INTO cavisson VALUES(236,"Sahil")')
+            client.query("INSERT INTO cavisson VALUES(236,'Sahil')")
             client.query('SELECT * FROM cavisson');
             /*.on('row', function (data) {
              console.log('1111',JSON.stringify(data));
