@@ -1,4 +1,4 @@
-var netjsagent = require('netjsagent').instrument({logLevel:'debug'});      // for instrumenting application
+var netjsagent = require('netjsagent').instrument({logLevel:'debug',consoleLogging : false});      // for instrumenting application
 
 process.on('uncaughtException', function (err) {
   console.log((new Date).toUTCString() + ' uncaughtException:', err.message);
@@ -52,6 +52,7 @@ var checkOut = require('./routes/checkOut');
 var routes = require('./routes/authenticate.js');
 var checkInventory = require('./routes/checkInventory');
 var executeBatchJob = require('./routes/executeBatchJob');
+var memcache = require('./routes/memcacheDB');
 
 app.set('views', path.join(__dirname, 'views'));
 // view engine setup
@@ -90,6 +91,7 @@ app.use('/nsecomm/checkOut',checkOut);
 app.use('/nsecomm/user',user);
 app.use('/nsecomm/checkInventory',checkInventory);
 app.use('/nsecomm/executeBatchJob',executeBatchJob);
+app.use('/nsecomm/memcache',memcache);
 
 //app.use('/nsecomm/authenticate',authenticate);
 

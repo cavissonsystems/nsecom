@@ -1,7 +1,7 @@
 /**
  * Created by bala on 3/7/15.
  */
-var router = require('express').Router();;
+var router = require('express').Router();
 var calculateAmount = require('../CalculateAmount');
 var placeOrder = require('../PlaceOrder');
 var updateCheckOut = require('../UpdateCheckOut');
@@ -230,7 +230,7 @@ function dbOperation(operation, productID, productName, column, uvalue, wcolumn,
 
 }
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+    router.get('/', function(req, res, next) {
     var operation, stfcc, stfv, productID, productName, column, uvalue, wcolumn, wvalue, query, logSeverity, logMessage, isManyMethodsCall;
     var db = req.db;
     var sleepTime = req.query.sleepTimeForCC;
@@ -297,7 +297,7 @@ router.get('/', function(req, res, next) {
     //if(blevel != level)
     //  System.out.println("level value is diffrent blevel = " + blevel + " level value = " + level);
 
-    var collection = db.get('usercollection');
+    //var collection = db.get('usercollection');
 
   res.render('checkout', {"stfcc" : stfcc, "stfv" : sleepTimeForValidate, "level" : level});
 

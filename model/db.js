@@ -1,4 +1,12 @@
 var mongoose = require('mongoose');
+var Mem = require('memcached')
+
+var mem = new Mem()
+mem.connect('127.0.0.1:11211',function(err,con){
+    if(err){
+        console.log(con.server)
+    }
+})
 try {
     var monoDblink = 'mongodb://localhost/nsecomDb';
    /* var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
