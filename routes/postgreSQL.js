@@ -5,6 +5,7 @@ var express = require('express');
 var router = express.Router();
 var pg = require('pg');
 var fs = require('fs')
+var path = require('path')
 var PGUSER,
     PGHOST,
     PGPORT,
