@@ -190,7 +190,7 @@ router.get('/', function (req,res) {
         makePostgresConnection(req, res)
     } catch(err) {
         console.log("Error in connecting with PG: "+err)
-        pgCalloutResp();
+        pgCalloutResp(res);
     }
 
 
