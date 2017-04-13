@@ -148,7 +148,7 @@ function makePostgresConnection(req, res)
             console.log("Connected successfully to pgdb ");
            /* client.query('DROP TABLE cavisson',function(err){
                 if(err){}*/
-            client.query('CREATE TABLE cavisson(id int,name varchar(40))',function(err,result) {
+            /*client.query('CREATE TABLE cavisson(id int,name varchar(40))',function(err,result) {
                 if(err){}
                 client.query("INSERT INTO cavisson VALUES(236,'Sahil')",function(err){
                     if(err){}
@@ -158,7 +158,26 @@ function makePostgresConnection(req, res)
                         pgCalloutResp(res);
                     })
                 })
-            })
+            })*/
+
+            client.query('CREATE TABLE cavisson(id int,name varchar(40))')
+                .on('error',function(){})
+            client.query('INSERT INTO cavisson VALUES(236,"Sahil")')
+                .on('error',function(){})
+            client.query('SELECT * FROM cavisson')
+                .on('error',function(){})
+            /*.on('row', function (data) {
+             console.log('1111',JSON.stringify(data));
+             })
+             .on('err', function (err) {
+             console.log(err);
+             })*/
+            client.query('DROP TABLE cavisson')
+                .on('error',function(){})
+                .on('end',function(){
+                    done();
+                    pgCalloutResp(res);
+                });
 
             //})
            /* client.query("INSERT INTO cavisson VALUES(236,'Sahil')",function(err,data){
