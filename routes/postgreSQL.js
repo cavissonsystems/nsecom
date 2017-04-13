@@ -46,13 +46,13 @@ var config = {
 
 var pool = new pg.Pool(config)
 //pg.defaults.ssl = true ;
-pool.connect(function (err, client,done) {
+/*pool.connect(function (err, client,done) {
 
     if (err)
         return console.log("Not connected with pgdb",err);
 
     console.log("Connected successfully to pgdb ");
-})
+})*/
 
 
 //this initializes a connection pool
@@ -146,37 +146,54 @@ function makePostgresConnection(req, res)
                 return console.log("Not connected with pgdb");
 
             console.log("Connected successfully to pgdb ");
+           /* client.query('DROP TABLE cavisson',function(err){
+                if(err){}*/
+            client.query('CREATE TABLE cavisson(id int,name varchar(40))',function(err,result) {
+                if(err){}
+                client.query("INSERT INTO cavisson VALUES(236,'Sahil')",function(err){
+                    if(err){}
+                    client.query('DROP TABLE cavisson',function(err,result){
+                        if(err){}
+                        done();
+                        pgCalloutResp(res);
+                    })
+                })
+            })
 
-            client.query('CREATE TABLE cavisson(id int,name varchar(40))')
-            client.query("INSERT INTO cavisson VALUES(236,'Sahil')")
-            client.query('SELECT * FROM cavisson');
-            /*.on('row', function (data) {
+            //})
+           /* client.query("INSERT INTO cavisson VALUES(236,'Sahil')",function(err,data){
+                if(err){}
+            })
+            client.query('SELECT * FROM cavisson')
+            .on('row', function (data) {
              console.log('1111',JSON.stringify(data));
              })
              .on('err', function (err) {
-             console.log(err);
+             //console.log(err);
              })*/
-            client.query('DROP TABLE cavisson')
-                .on('end',function(){
-                    done();
-                    pgCalloutResp();
-                });
+
         });
     }
     catch(err) {
         console.log("Error in connecting with PG: "+err)
-        pgCalloutResp();
+        pgCalloutResp(res);
     }
-    function pgCalloutResp()
-    {
-        res.render('mongodb',{DB: 'PosetGreSQL !'}) ;
-    }
+}
+function pgCalloutResp(res)
+{
+    res.render('mongodb',{DB: 'PosetGreSQL !'}) ;
 }
 
 
-
 router.get('/', function (req,res) {
-    makePostgresConnection(req,res)
+    try {
+        makePostgresConnection(req, res)
+    } catch(err) {
+        console.log("Error in connecting with PG: "+err)
+        pgCalloutResp();
+    }
+
+
 });
 
 module.exports = router;
