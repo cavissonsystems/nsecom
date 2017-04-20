@@ -15,11 +15,13 @@ function createRedisConnection (req,res)
 {
     try {
 
-
        /* client.auth('Sahil@123', function (err) {
             if (err)  throw err;
         });*/
-
+        if(!client) {
+            console.log("Not connected to redis.");
+            return
+        }
         client.on('connect', function (err) {
             if (err) throw  err;
             console.log('connected');

@@ -102,6 +102,8 @@ function searchProductInRedis(req,res){
         UserName = req.session.userName.username;
     client.get(keyword, function (err, data){
         try {
+            if(err)
+                console.log("Getting error in caching",err)
             if (data) {
                 console.log("Getting dAta from redis server");
                 products = JSON.parse(data);

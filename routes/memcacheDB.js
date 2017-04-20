@@ -14,15 +14,15 @@ var profile = {
 
 function connectToMemcacheDB(req,res){
         mem.set('cav',profile,1000,function(err){
-            if(err) throw new err ;
+            if(err){} ;
         })
 
     mem.get('cav', function(err,data){
         console.log(data)
         if(data)
         mem.get('cav')
-        mem.del('cav', function (err) {
-            if(err) throw new err;
+        mem.del('cav', function () {
+            //if(err) {}//throw new err;
 
             sendResp(req,res)
         });
