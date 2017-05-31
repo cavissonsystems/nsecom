@@ -55,6 +55,8 @@ var executeBatchJob = require('./routes/executeBatchJob');
 var memcache = require('./routes/memcacheDB');
 //var socketio = require('./routes/socketio');
 var net = require('./routes/net');
+var zoo  = require('./routes/zookeeperCall');
+
 
 app.set('views', path.join(__dirname, 'views'));
 // view engine setup
@@ -96,6 +98,7 @@ app.use('/nsecomm/executeBatchJob',executeBatchJob);
 app.use('/nsecomm/memcache',memcache);
 //app.use('/nsecomm/socketio',socketio);
 app.use('/nsecomm/net',net);
+app.use('/nsecomm/zoo',zoo);
 
 //app.use('/nsecomm/authenticate',authenticate);
 
