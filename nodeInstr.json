@@ -7,7 +7,7 @@
 
   "instrument":true
 },{
-  "modulename":"**/node_modules/redis/**",
+  "modulename":"**/node_modules/**",
 
   "instrument":true
 }]

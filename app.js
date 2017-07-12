@@ -24,7 +24,7 @@ var session      = require('express-session');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bCrypt = require('bcrypt-nodejs')
-app.use(session({ secret: 'nodejs'}));
+app.use(session({ secret: 'nodejs',resave: true, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
@@ -133,6 +133,7 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+   
 
 //var cpuProfile = profiler.stopProfiling('app')
 module.exports = app;
