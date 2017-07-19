@@ -32,14 +32,6 @@ function checkStoreInventory(){
 
 
 function productInfo() {
-    for(i in 100000000000000000000000000000000000000000000000000){}
-    var milliseconds = 3500;
-    var start = new Date().getTime();
-    for (var i = 0; i < 1e7; i++) {
-        if ((new Date().getTime() - start) > milliseconds){
-            break;
-        }
-    }
     console.log("productInfo has called");
     setTimeout(function() {
     }, 2000);
