@@ -6,8 +6,4 @@
   "modulename":"http",
 
   "instrument":true
-},{
-  "modulename":"**/node_modules/**",
-
-  "instrument":true
 }]
