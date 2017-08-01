@@ -18,8 +18,9 @@ if(data){
     port = address[2];
     uri = address[3]
 }
+var client='';
 try {
-    var client = redis.createClient(redisUri);
+    client = redis.createClient(redisUri).on('error',function(err){console.log('Redis is not Running ')});
 }catch(e){console.log("Cant connect to redis, url is not correct")}
 
 var products = {};

@@ -20,7 +20,7 @@ try {
 
     var con = mongoose.connection;
     con.on('error',function(err){
-        console.log("Error in db.js ",err.stack)
+        console.log("Unable to Connect to Mongod Server \n Please start mongoDB ...")
     });
 }
 catch(e)

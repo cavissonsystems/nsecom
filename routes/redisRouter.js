@@ -8,9 +8,9 @@ var redis = require('redis');
 
 // var client = redis.createClient('//redis-17593.c8.us-east-1-3.ec2.cloud.redislabs.com:17593', {no_ready_check: true});
 try {
-    var client = redis.createClient('//localhost:6379', {no_ready_check: true});
+    var client = redis.createClient('//localhost:6379', {no_ready_check: true}).on('error',function(err){});
 }
-catch(err){console.log(err)}
+catch(err){console.log('-----1--',err)}
 function createRedisConnection (req,res)
 {
     try {
