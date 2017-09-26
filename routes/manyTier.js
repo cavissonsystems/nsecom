@@ -33,12 +33,7 @@ function multiHttpConnection(req, res) {
 
             //the whole response has been recieved, so we just print it out here
             response.on('end', function () {
-                /*f1 = true;
-                if (f1 == true && f2 == true) {
-                    //sendResp();
-                }*/
-                //http.request(options1, callback1).end();
-
+                    sendResp();
             });
         };
 
@@ -53,31 +48,17 @@ function multiHttpConnection(req, res) {
 
             //another chunk of data has been recieved, so append it to `str`
             response.on('data', function (chunk) {
-            //    str += chunk;
             });
 
             //the whole response has been recieved, so we just print it out here
             response.on('end', function () {
-
-                //console.log("Google call has ended");
-                //     f2 = true;
-                //   if(f1 == true && f2 == true ) {
                 sendResp();
-                // }
 
             });
         };
-	/*http.request(options);
-	sendResp();*/
-	//http.request(options1);
- //       x();
+        // x();
         http.request(options, callback).on('error',function(err){console.log(err)}).end();
-        sendResp();
-        //http.request(options1, callback1).on('error', function (err) {
-          //  f2 = true;
-           // console.log(err);
-           // sendResp();
-       // }).end();
+        //sendResp();
     }
     catch(err)
     {
@@ -87,9 +68,9 @@ function multiHttpConnection(req, res) {
 
 
 
-function sendResp(){
+    function sendResp(){
         res.render('checkout');
-};
+    };
 
 }
 
