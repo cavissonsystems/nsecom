@@ -56,6 +56,10 @@ var memcache = require('./routes/memcacheDB');
 //var socketio = require('./routes/socketio');
 var net = require('./routes/net');
 var zoo  = require('./routes/zookeeperCall');
+var zlib = require('./routes/zlib');
+var uzlib = require('./routes/uzlib');
+var crypto = require('./routes/crypto')
+var timer = require('./routes/timer')
 
 
 app.set('views', path.join(__dirname, 'views'));
@@ -99,6 +103,10 @@ app.use('/nsecomm/memcache',memcache);
 //app.use('/nsecomm/socketio',socketio);
 app.use('/nsecomm/net',net);
 app.use('/nsecomm/zoo',zoo);
+app.use('/nsecomm/zlib',zlib);
+app.use('/nsecomm/uzlib',uzlib);
+app.use('/nsecomm/crypto',crypto);
+app.use('/nsecomm/timer',timer);
 
 //app.use('/nsecomm/authenticate',authenticate);
 
