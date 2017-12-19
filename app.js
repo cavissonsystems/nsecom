@@ -1,4 +1,4 @@
-var netjsagent = require('netjsagent').instrument({logLevel:'debug',BCILoggingMode : 'FILE'});      // for instrumenting application
+var netjsagent = require('cav_netjsagent').instrument({logLevel:'debug',BCILoggingMode : 'FILE'});      // for instrumenting application
 
 process.on('uncaughtException', function (err) {
   console.log((new Date).toUTCString() + ' uncaughtException:', err.message);
@@ -60,6 +60,9 @@ var zlib = require('./routes/zlib');
 var uzlib = require('./routes/uzlib');
 var crypto = require('./routes/crypto')
 var timer = require('./routes/timer')
+var dns_lookup = require('./routes/dns')
+var reverse_dns = require('./routes/reverse_dns')
+var udp = require('./routes/udp')
 
 
 app.set('views', path.join(__dirname, 'views'));
@@ -107,6 +110,9 @@ app.use('/nsecomm/zlib',zlib);
 app.use('/nsecomm/uzlib',uzlib);
 app.use('/nsecomm/crypto',crypto);
 app.use('/nsecomm/timer',timer);
+app.use('/nsecomm/dns',dns_lookup);
+app.use('/nsecomm/reversedns',reverse_dns)
+app.use('/nsecomm/udp',udp)
 
 //app.use('/nsecomm/authenticate',authenticate);
 
@@ -141,7 +147,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-   
 
 //var cpuProfile = profiler.stopProfiling('app')
 module.exports = app;
