@@ -1,4 +1,4 @@
-var netjsagent = require('cav_netjsagent').instrument({logLevel:'debug',BCILoggingMode : 'FILE'});      // for instrumenting application
+var netjsagent = require('netjsagent').instrument({logLevel:'debug',BCILoggingMode : 'FILE'});      // for instrumenting application
 
 process.on('uncaughtException', function (err) {
   console.log((new Date).toUTCString() + ' uncaughtException:', err.message);
