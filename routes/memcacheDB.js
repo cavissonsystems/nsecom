@@ -12,32 +12,30 @@ var profile = {
     'field':'Performance testing'
 }
 
-function connectToMemcacheDB(req,res){
-        mem.set('cav',profile,1000,function(err){
-            if(err){} ;
-        })
+function connectToMemcacheDB(request,response){
+    mem.set('cav',profile,10000,function(err){
+        if(err){} ;
+    })
 
     mem.get('cav', function(err,data){
-        console.log(data)
         if(data)
-        mem.get('cav')
         mem.del('cav', function () {
             //if(err) {}//throw new err;
 
-            sendResp(req,res)
+            sendResp(request,response)
         });
     });
     //mem.get('cav')
     //mem.del('cav', function (err) {
     //    if(err) throw new err;
     //});
-    //sendResp(req,res)
-}
-function sendResp(req,res){
-    res.render('mongodb',{DB:'memcache'})
+    //sendResp(request,response)
+    function sendResp(request,response){
+        response.render('mongodb',{DB:'memcache'})
+    }
 }
 
-router.get('/',function(req,res){
-    connectToMemcacheDB(req,res)
+router.get('/',function(request,response){
+    connectToMemcacheDB(request,response)
 })
 module.exports=router;
