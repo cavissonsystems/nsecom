@@ -50,7 +50,6 @@ function productInfo(req,res, prodid,upc,image, price)
 
 };
 function productData() {
-    console.log("productData has called");
     setTimeout(function() {
     }, 2000);
 }

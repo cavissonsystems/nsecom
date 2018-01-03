@@ -10,12 +10,12 @@ function udpprogram(res){
         server.close();
     })
     server.on('message', function(msg, rinfo)  {
-        console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
+        //console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
     });
 
     server.on('listening', function()  {
         const address = server.address();
-        console.log(`server listening ${address.address}:${address.port}`);
+        //console.log(`server listening ${address.address}:${address.port}`);
     });
     server.bind(41234);
 

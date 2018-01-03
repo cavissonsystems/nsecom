@@ -10,7 +10,6 @@ var router = express.Router();
 var g = router.get('/', function(req, res, next) {
 
         res.render('nsecomm', { title: 'nsecomm' });
-    //console.trace("Trace of application");
 });
 
 module.exports = g;

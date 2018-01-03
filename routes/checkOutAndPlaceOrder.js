@@ -9,7 +9,6 @@ var checkExecutionTimeForMethods = require('../CheckExecutionTimeForMethods');
 var http = require('http');
 
 function availabilityCheck(req, res) {
-    console.log("availabilityCheck has called");
 try{
  //  x();
 }catch(err){
@@ -26,13 +25,10 @@ throw new Error("Custom Error");
 }
 
 
-function checkStoreInventory(){
-    console.log("checkStoreInventory has called");
-}
+function checkStoreInventory(){}
 
 
 function productInfo() {
-    console.log("productInfo has called");
     setTimeout(function() {
     }, 2000);
 }
@@ -73,15 +69,9 @@ function checkout(req, res, sleepTime, sleepTimeForValidate, level, isManyMethod
                 //});
 
                 response.on('end', function () {
-                   // console.log("Yahoo call has ended");
 
                 });
             }
-
-
-            //http.request(options, callback).on('error', function (err) {
-            //    console.log(err)
-            //}).end();
 
             checkExecutionTimeForMethods.calTimeFor_M1();
             checkExecutionTimeForMethods.calTimeFor_M2();
@@ -144,7 +134,6 @@ function checkout(req, res, sleepTime, sleepTimeForValidate, level, isManyMethod
 
 function exeDBQuery(query){
     try {
-        console.log("exeDBQuery has called");
         calculateAmount.makeConnection();
         calculateAmount.executeDBQuery(query);
     }
@@ -158,7 +147,6 @@ function exeDBQuery(query){
 
 function dbOperation(operation, productID, productName, column, uvalue, wcolumn, wvalue, quantity, price){
     try {
-        console.log("dbOperation has called");
         query = null;
         if (operation == "insert") {
             if (productID != null && productName != null && quantity != 0 && price != 0) {
@@ -279,7 +267,7 @@ function dbOperation(operation, productID, productName, column, uvalue, wcolumn,
 
     checkout(req, res, sleepTime, sleepTimeForValidate, level, isManyMethodsCall);
 
-    console.log('sleep time = ' + sleepTime + ' sleep time for validation =' + sleepTimeForValidate + 'level = ' + level);
+    //console.log('sleep time = ' + sleepTime + ' sleep time for validation =' + sleepTimeForValidate + 'level = ' + level);
     if(operation != null)
         dbOperation(operation, productID, productName, column, uvalue, wcolumn, wvalue, quantity, price ,query);
     if(query != null)

@@ -24,7 +24,6 @@ function createRedisConnection (req,res)
         }
         client.on('connect', function (err) {
             if (err) throw  err;
-            console.log('connected');
         });
 
         client.on('error', function (err) {
@@ -46,7 +45,6 @@ function createRedisConnection (req,res)
             if (err)
                 console.log("error in redis get call : " + err);
 
-                console.log("reply is : " + rply);
                 client.hmset(['framework', 'angular', 'bootstrap', 'express', 'node']/*, function (err,rply) {
                  console.log(rply.toString())
                  }*/);
@@ -58,7 +56,6 @@ function createRedisConnection (req,res)
     }
     catch(err)
     {
-        console.log("Error in connecting with redis : "+err);
     }
 
     function redisCallout (res)

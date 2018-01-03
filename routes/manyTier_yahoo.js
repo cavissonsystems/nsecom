@@ -26,7 +26,6 @@ function availabilityCheck(req, res)
         });
 
         response.on('end', function () {
-            console.log("Yahoo call has ended");
 
             f1 = true;
             if(f1 ==true && f2 ==true)
@@ -70,23 +69,18 @@ function availabilityCheck(req, res)
     var client = new pg.Client(URL);
     client.connect();
 
-    console.log("Connected");
-
     var query = client.query("SELECT * FROM emp;");
     query.on("row", function (row, result) {
         result.addRow(row);
     });
     query.on("end", function (result) {
         client.end();
-        console.log(JSON.stringify(result.rows, null, " ") + "\n");
         f2 = true;
         if(f1 ==true && f2 ==true)
             respForCallout();
     });
     query.on('err', function (err) {
-        console.log(err);
     });
-    //3333333333333333333333333333333
 
 
 

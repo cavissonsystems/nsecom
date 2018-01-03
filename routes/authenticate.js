@@ -75,7 +75,6 @@ router.post('/login', function(req, res) {
                                         if (err)
                                             res.send("There was a problem adding the information to the database.");
 
-                                        //          console.log("deleted successfully : ",blob)
                                     })
                                 }
                                 catch(e){console.log(e)}

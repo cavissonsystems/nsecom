@@ -51,7 +51,6 @@ var pool = new pg.Pool(config)
     if (err)
         return console.log("Not connected with pgdb",err);
 
-    console.log("Connected successfully to pgdb ");
 })*/
 
 
@@ -145,7 +144,6 @@ function makePostgresConnection(req, res)
             if (err)
                 return console.log("Not connected with pgdb");
 
-            console.log("Connected successfully to pgdb ");
            /* client.query('DROP TABLE cavisson',function(err){
                 if(err){}*/
             /*client.query('CREATE TABLE cavisson(id int,name varchar(40))',function(err,result) {
@@ -208,7 +206,6 @@ router.get('/', function (req,res) {
     try {
         makePostgresConnection(req, res)
     } catch(err) {
-        console.log("Error in connecting with PG: "+err)
         pgCalloutResp(res);
     }
 

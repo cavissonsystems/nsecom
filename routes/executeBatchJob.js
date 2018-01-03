@@ -13,12 +13,10 @@ function executeAllBatchJob(req,res) {
     verifyBatchJob(req,res);
 }
 function preBatchJob(){
-    console.log("Executing prejob");
     setTimeout(function() {
     }, 2000);
 }
 function posBatchtJob(){
-    console.log("Executing postjob");
     setTimeout(function() {
     }, 2000);
 }

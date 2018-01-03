@@ -21,15 +21,12 @@ else{
 server.listen('5000');
 
 app.get('/',function(req,res){
-    console.log('Catched get method')
     res.sendFile(__dirname+'/index.html')
 })
 
 
 io.on('connection',function(socket){
-    console.log('user connected')
     socket.on('disconnect',function(){
-        console.log('User disconnect')
     })
     socket.close()
 })

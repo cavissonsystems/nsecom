@@ -21,14 +21,10 @@ var options = {
 router.get('/', function(req, res, next) {
 
     var req1 = http.request(options, function(res1) {
-        console.log('STATUS: ' + res1.statusCode);
-        console.log('HEADERS: ' + JSON.stringify(res1.headers));
         res1.setEncoding('utf8');
 
         res1.on('data', function (chunk) {
             res.render('server', {"data" : chunk});
-console.log("Middle of code");
-
 
 
         });
@@ -41,7 +37,6 @@ console.log("Middle of code");
 // write data to request body
 //req.write(postData);
     req1.end();
-    console.log("Last");
 
 
 });
