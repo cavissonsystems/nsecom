@@ -8,8 +8,8 @@ function sampleTimer(res){
         setTimeout(function(){
 
             respond()
-        },1000)
-    },500)
+        },10)
+    })
 
     function respond(){
         res.render('mongodb', {DB: 'Timer !'});
