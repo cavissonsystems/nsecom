@@ -22,14 +22,14 @@ function connectToMemcacheDB(request,response){
         mem.del('cav', function () {
             //if(err) {}//throw new err;
 
-            sendResp(request,response)
+            //sendResp(request,response)
         });
     });
     //mem.get('cav')
     //mem.del('cav', function (err) {
     //    if(err) throw new err;
     //});
-    //sendResp(request,response)
+    sendResp(request,response)
     function sendResp(request,response){
         response.render('mongodb',{DB:'memcache'})
     }
