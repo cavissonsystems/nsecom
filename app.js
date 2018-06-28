@@ -63,6 +63,7 @@ var timer = require('./routes/timer')
 var dns_lookup = require('./routes/dns')
 var reverse_dns = require('./routes/reverse_dns')
 var udp = require('./routes/udp')
+var ecmaScript = require('./routes/EcmaScript')
 
 
 app.set('views', path.join(__dirname, 'views'));
@@ -113,6 +114,7 @@ app.use('/nsecomm/timer',timer);
 app.use('/nsecomm/dns',dns_lookup);
 app.use('/nsecomm/reversedns',reverse_dns)
 app.use('/nsecomm/udp',udp)
+app.use('/nsecomm/ecmatest',ecmaScript)
 
 //app.use('/nsecomm/authenticate',authenticate);
 
