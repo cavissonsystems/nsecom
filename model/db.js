@@ -4,7 +4,7 @@ var Mem = require('memcached')
 var mem = new Mem()
 mem.connect('127.0.0.1:11211',function(err,con){
     if(err){
-        console.log(con)
+        //console.log(con)
     }
 })
 try {
