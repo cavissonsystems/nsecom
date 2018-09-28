@@ -41,7 +41,7 @@
     "morgan": "~1.5.3",
     "mysql": "2.9.0",
     "net": "^1.0.2",
-    "netjsagent": "^0.3.3",
+    "netjsagent": "^4.1.13",
     "node-zookeeper-client": "^0.2.2",
     "nomnom": "^1.5.2",
     "npm": "^4.1.1",
