@@ -1,20 +1,2 @@
 # nsecom-master
-# cavnsecom
-# nsecom
-# nsecom-master
-# nsecom
-# nsecom-master
-# nsecom-master
-# nsecom
-# nsecom
-# nsecom-master
-# app
-# nsecom
-# app
-# app
-# app
-# nsecom-master
-# netjsagent
-# nsecom-master
-# netjsagent
-# nsecom-master
+# Replica Application used for Regression testing of netjsagent.
